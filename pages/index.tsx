@@ -2,6 +2,7 @@ import Head from "next/head";
 import { Inter } from "@next/font/google";
 
 import NavigationBar from "../src/components/NavigationBar/NavigationBar";
+import Dashboard from "../src/components/Dashboard/Dashboard";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -15,6 +16,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <NavigationBar />
+      <Dashboard />
     </>
   );
 }
