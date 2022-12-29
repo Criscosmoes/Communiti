@@ -4,9 +4,17 @@ import { Inter } from "@next/font/google";
 import NavigationBar from "../src/components/NavigationBar/NavigationBar";
 import Dashboard from "../src/components/Dashboard/Dashboard";
 
+import { checkIfLoggedIn } from "../lib/queries/models/users/helper";
+import { User } from "../lib/queries/models/users/users";
+import axios from "axios";
+
 const inter = Inter({ subsets: ["latin"] });
 
-export default function Home() {
+type Props = {
+  user: User;
+};
+
+export default function Home({ user }: Props) {
   return (
     <>
       <Head>
@@ -15,8 +23,18 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <NavigationBar />
+      <NavigationBar user={user} />
       <Dashboard />
     </>
   );
+}
+
+export async function getServerSideProps(context: any) {
+  const user = await checkIfLoggedIn(
+    `connect.sid=${context.req.cookies["connect.sid"]}`
+  );
+
+  return {
+    props: { user },
+  };
 }
