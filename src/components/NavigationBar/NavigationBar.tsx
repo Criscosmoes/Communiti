@@ -12,8 +12,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import { User } from "../../../lib/queries/models/users/users";
 import GoogleIcon from "@mui/icons-material/Google";
+import { User } from "../../../lib/models/user/User";
 
 import Link from "next/link";
 
