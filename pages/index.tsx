@@ -1,14 +1,10 @@
 import Head from "next/head";
-import { Inter } from "@next/font/google";
 
 import NavigationBar from "../src/components/NavigationBar/NavigationBar";
 import Dashboard from "../src/components/Dashboard/Dashboard";
 
-import { checkIfLoggedIn } from "../lib/queries/models/users/helper";
-import { User } from "../lib/queries/models/users/users";
-import axios from "axios";
-
-const inter = Inter({ subsets: ["latin"] });
+import { checkIfLoggedIn } from "../lib/models/user/helper";
+import { User } from "../lib/models/user/user";
 
 type Props = {
   user: User;
