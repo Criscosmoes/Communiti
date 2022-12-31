@@ -23,7 +23,8 @@ export default function PopularCommunities({ popularCommunities }: Props) {
     <Card
       sx={{
         minWidth: 275,
-        margin: 2,
+        marginBottom: 2,
+        marginTop: 2,
         backgroundColor: "#1E1F23",
         color: "white",
         border: "2px solid #56575A",

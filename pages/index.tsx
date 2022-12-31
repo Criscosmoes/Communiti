@@ -10,6 +10,7 @@ import {
   getRecentlyAddedCommunities,
   getPopularCommunities,
 } from "../lib/models/community/queries";
+import { getRecentyAddedUsers } from "../lib/models/user/queries";
 import { Community } from "../lib/models/community/Community";
 
 type Props = {
@@ -17,6 +18,7 @@ type Props = {
   communities: Community[];
   recentlyAddedCommunities: Community[];
   popularCommunities: Community[];
+  recentUsers: User[];
 };
 
 export default function Home({
@@ -24,8 +26,8 @@ export default function Home({
   communities,
   recentlyAddedCommunities,
   popularCommunities,
+  recentUsers,
 }: Props) {
-  console.log(popularCommunities);
   return (
     <>
       <Head>
@@ -39,6 +41,7 @@ export default function Home({
         communities={communities}
         recentlyAddedCommunities={recentlyAddedCommunities}
         popularCommunities={popularCommunities}
+        recentUsers={recentUsers}
       />
     </>
   );
@@ -55,7 +58,15 @@ export async function getServerSideProps(context: any) {
 
   const popularCommunities = await getPopularCommunities();
 
+  const recentUsers = await getRecentyAddedUsers();
+
   return {
-    props: { user, communities, recentlyAddedCommunities, popularCommunities },
+    props: {
+      user,
+      communities,
+      recentlyAddedCommunities,
+      popularCommunities,
+      recentUsers,
+    },
   };
 }

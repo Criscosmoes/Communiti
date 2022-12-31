@@ -106,7 +106,7 @@ export default function NavigationBar({ user }: Props) {
           >
             {user.image ? (
               <img
-                className={styles.userImage}
+                className="user-image"
                 src={user.image}
                 referrerPolicy="no-referrer"
               />
@@ -136,15 +136,15 @@ export default function NavigationBar({ user }: Props) {
   );
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" sx={{ background: "#1E1F23" }}>
+    <Box sx={{ flexGrow: 1, marginBottom: 7 }}>
+      <AppBar position="fixed" sx={{ background: "#1E1F23" }}>
         <Toolbar>
           <IconButton
             size="large"
             edge="start"
             color="inherit"
             aria-label="open drawer"
-            sx={{ mr: 2 }}
+            sx={{ display: { lg: "none", md: "block" } }}
           >
             <MenuIcon />
           </IconButton>
@@ -185,7 +185,7 @@ export default function NavigationBar({ user }: Props) {
                 >
                   {user.image ? (
                     <img
-                      className={styles.userImage}
+                      className="user-image"
                       src={user.image}
                       referrerPolicy="no-referrer"
                     />

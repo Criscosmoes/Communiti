@@ -70,3 +70,9 @@ a {
 	cursor: pointer;
 }
 
+.user-image {
+	
+	width: 40px;
+	border-radius: 50px;
+	
+}
