@@ -15,6 +15,7 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import GoogleIcon from "@mui/icons-material/Google";
 import { User } from "../../../lib/models/user/User";
 import styles from "./NavigationBar.module.css";
+import SearchInput from "../SearchInput/SearchInput";
 
 import Link from "next/link";
 
@@ -163,11 +164,7 @@ export default function NavigationBar({ user }: Props) {
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
-            <StyledInputBase
-              sx={{ width: "100%" }}
-              placeholder="Search communities"
-              inputProps={{ "aria-label": "search" }}
-            />
+            <SearchInput />
           </Search>
 
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }} />

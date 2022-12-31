@@ -76,3 +76,23 @@ a {
 	border-radius: 50px;
 	
 }
+
+.css-1ej5eh4-MuiInputBase-root-MuiOutlinedInput-root {
+	color: white !important; 
+	border: none !important;
+}
+
+.css-1d3z3hw-MuiOutlinedInput-notchedOutline {
+	border-width: none !important;
+	border-radius: none !important;
+	border-style: none !important;
+}
+
+.css-1qqsdnr-MuiAutocomplete-root .MuiAutocomplete-input {
+	padding-left: 50px !important; 
+
+}
+
+.css-1qqsdnr-MuiAutocomplete-root .MuiOutlinedInput-root {
+	padding: 5px !important
+}

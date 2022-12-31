@@ -35,6 +35,7 @@ export default function Dashboard({
     <Box>
       <Grid container>
         <Grid
+          item
           sx={{ display: { xs: "none", md: "none", lg: "block" } }}
           md={3}
           lg={3}
@@ -43,12 +44,12 @@ export default function Dashboard({
             <RecentlyAddedUsers recentUsers={recentUsers} />
           </Item>
         </Grid>
-        <Grid md={8} xs={12} lg={6}>
+        <Grid md={8} xs={12} lg={6} item>
           <Item sx={{ backgroundColor: "#17181C" }}>
             <CommunityList communities={communities} />
           </Item>
         </Grid>
-        <Grid sx={{ display: { xs: "none", md: "block" } }} md={4} lg={3}>
+        <Grid sx={{ display: { xs: "none", md: "block" } }} md={4} lg={3} item>
           <Item sx={{ backgroundColor: "#17181C" }}>
             <PopularCommunities popularCommunities={popularCommunities} />
           </Item>
