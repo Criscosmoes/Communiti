@@ -28,7 +28,9 @@ export default function CommunityCard({ community }: Props) {
         <Typography gutterBottom variant="h4" component="p">
           {community.community_name}
         </Typography>
-        <Typography variant="body1">{community.caption}</Typography>
+        <Typography sx={{ color: "#898B8F" }} variant="body1">
+          {community.caption}
+        </Typography>
       </CardContent>
       <CardMedia
         sx={{ height: 450 }}
