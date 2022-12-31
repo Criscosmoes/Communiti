@@ -5,4 +5,5 @@ export interface Community {
   caption: string;
   image: string;
   followers?: number;
+  created_on?: string;
 }

@@ -5,6 +5,7 @@ import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
 import { Community } from "../../../lib/models/community/Community";
 import CommunityList from "../CommunityList/CommunityList";
+import RecentlyAddedCommunities from "../RecentlyAddedCommunities/RecentlyAddedCommunities";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -16,9 +17,13 @@ const Item = styled(Paper)(({ theme }) => ({
 
 type Props = {
   communities: Community[];
+  recentlyAddedCommunities: Community[];
 };
 
-export default function Dashboard({ communities }: Props) {
+export default function Dashboard({
+  communities,
+  recentlyAddedCommunities,
+}: Props) {
   return (
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={2}>
@@ -31,7 +36,11 @@ export default function Dashboard({ communities }: Props) {
           </Item>
         </Grid>
         <Grid sx={{ display: { xs: "none", md: "block" } }} item md={3}>
-          <Item>xs=4</Item>
+          <Item sx={{ backgroundColor: "#17181C" }}>
+            <RecentlyAddedCommunities
+              recentlyAddedCommunities={recentlyAddedCommunities}
+            />
+          </Item>
         </Grid>
       </Grid>
     </Box>

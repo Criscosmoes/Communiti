@@ -5,15 +5,23 @@ import Dashboard from "../src/components/Dashboard/Dashboard";
 
 import { checkIfLoggedIn } from "../lib/models/user/helper";
 import { User } from "../lib/models/user/User";
-import { getCommunities } from "../lib/models/community/queries";
+import {
+  getCommunities,
+  getRecentlyAddedCommunities,
+} from "../lib/models/community/queries";
 import { Community } from "../lib/models/community/Community";
 
 type Props = {
   user: User;
   communities: Community[];
+  recentlyAddedCommunities: Community[];
 };
 
-export default function Home({ user, communities }: Props) {
+export default function Home({
+  user,
+  communities,
+  recentlyAddedCommunities,
+}: Props) {
   return (
     <>
       <Head>
@@ -23,7 +31,10 @@ export default function Home({ user, communities }: Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <NavigationBar user={user} />
-      <Dashboard communities={communities} />
+      <Dashboard
+        communities={communities}
+        recentlyAddedCommunities={recentlyAddedCommunities}
+      />
     </>
   );
 }
@@ -35,7 +46,9 @@ export async function getServerSideProps(context: any) {
 
   const communities = await getCommunities();
 
+  const recentlyAddedCommunities = await getRecentlyAddedCommunities();
+
   return {
-    props: { user, communities },
+    props: { user, communities, recentlyAddedCommunities },
   };
 }

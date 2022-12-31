@@ -11,11 +11,7 @@ const CommunityList = ({ communities }: Props) => {
     return <CommunityCard community={community} />;
   });
 
-  return (
-    <div /* className={styles.communityListContainer} */>
-      {renderedCommunities}
-    </div>
-  );
+  return <div>{renderedCommunities}</div>;
 };
 
 export default CommunityList;
