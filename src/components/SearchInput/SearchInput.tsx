@@ -2,12 +2,16 @@ import * as React from "react";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Autocomplete from "@mui/material/Autocomplete";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import debounce from "lodash.debounce";
+import { useRouter } from "next/router";
+
 import { getCommunitiesByTerm } from "../../../lib/models/community/queries";
 import { Community } from "../../../lib/models/community/Community";
-import debounce from "lodash.debounce";
 
 export default function SearchInput() {
+  const router = useRouter();
+
   const [userInput, setUserInput] = useState<string>("");
   const [totalOptions, setTotalOptions] = useState<Community[]>([]);
 
@@ -32,12 +36,18 @@ export default function SearchInput() {
     setTotalOptions(communities);
   };
 
+  const onSelect = (e: any, value: string | null) => {
+    const community = totalOptions.find(
+      (community) => value === community.community_name
+    );
+
+    router.push(`/community/${community?.community_id}`);
+  };
+
   return (
     <Stack>
       <Autocomplete
-        options={totalOptions.map(
-          (option) => `${option.community_name}: ${option.caption}`
-        )}
+        options={totalOptions.map((option) => option.community_name)}
         renderInput={(params) => {
           return <TextField {...params} />;
         }}
@@ -46,6 +56,7 @@ export default function SearchInput() {
         clearOnEscape={false}
         noOptionsText="No Communities found"
         popupIcon={""}
+        onChange={(e, value) => onSelect(e, value)}
       />
     </Stack>
   );
