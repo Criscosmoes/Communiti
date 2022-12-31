@@ -8,6 +8,7 @@ import { User } from "../lib/models/user/User";
 import {
   getCommunities,
   getRecentlyAddedCommunities,
+  getPopularCommunities,
 } from "../lib/models/community/queries";
 import { Community } from "../lib/models/community/Community";
 
@@ -15,13 +16,16 @@ type Props = {
   user: User;
   communities: Community[];
   recentlyAddedCommunities: Community[];
+  popularCommunities: Community[];
 };
 
 export default function Home({
   user,
   communities,
   recentlyAddedCommunities,
+  popularCommunities,
 }: Props) {
+  console.log(popularCommunities);
   return (
     <>
       <Head>
@@ -34,6 +38,7 @@ export default function Home({
       <Dashboard
         communities={communities}
         recentlyAddedCommunities={recentlyAddedCommunities}
+        popularCommunities={popularCommunities}
       />
     </>
   );
@@ -48,7 +53,9 @@ export async function getServerSideProps(context: any) {
 
   const recentlyAddedCommunities = await getRecentlyAddedCommunities();
 
+  const popularCommunities = await getPopularCommunities();
+
   return {
-    props: { user, communities, recentlyAddedCommunities },
+    props: { user, communities, recentlyAddedCommunities, popularCommunities },
   };
 }
