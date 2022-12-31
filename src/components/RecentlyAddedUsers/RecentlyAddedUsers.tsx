@@ -4,20 +4,29 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import CardActions from "@mui/material/CardActions";
-import { Community } from "../../../lib/models/community/Community";
+import { User } from "../../../lib/models/user/User";
 
 type Props = {
-  recentlyAddedCommunities: Community[];
+  recentUsers: User[];
 };
 
-export default function RecentlyAddedCommunities({
-  recentlyAddedCommunities,
-}: Props) {
-  const renderedCommunities = recentlyAddedCommunities.map((community) => {
+export default function RecentlyAddedUsers({ recentUsers }: Props) {
+  const renderedCommunities = recentUsers.map((user) => {
     return (
-      <CardContent key={community.community_id}>
-        <Typography variant="h5">{community.community_name}</Typography>
-        <Typography sx={{ color: "#898B8F" }}>{community.caption}</Typography>
+      <CardContent
+        key={user.user_id}
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <Typography variant="h5">{user.username}</Typography>
+        <img
+          className="user-image"
+          src={user.image}
+          referrerPolicy="no-referrer"
+        />
       </CardContent>
     );
   });
@@ -35,19 +44,12 @@ export default function RecentlyAddedCommunities({
       }}
     >
       <CardContent>
-        <Typography variant="h4">Recently Added</Typography>
+        <Typography variant="h4">Recently Added Users</Typography>
       </CardContent>
       {renderedCommunities}
       <CardActions
         sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-      >
-        <Button
-          size="medium"
-          sx={{ color: "white", backgroundColor: "#2C87FC" }}
-        >
-          Add Community
-        </Button>
-      </CardActions>
+      ></CardActions>
     </Card>
   );
 }
