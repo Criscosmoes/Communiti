@@ -35,8 +35,6 @@ export async function getServerSideProps(context: any) {
 
   const communities = await getCommunities();
 
-  console.log(communities);
-
   return {
     props: { user, communities },
   };

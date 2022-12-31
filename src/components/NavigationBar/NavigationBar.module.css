@@ -1,42 +1,6 @@
-.navigationBar {
-    display:flex; 
-    justify-content: space-between;
-    align-items: center;
-    height: 70px; 
-    background: #1E1F23; 
-}
 
-.navigationBar > * {
-    margin: 20px; 
-}
-
-.titleContainer {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.titleContainer h2 {
-    font-size: 35px; 
-}
-
-.navigationInputContainer {
-    display: flex;
-    width: 30%;
-    background-color: white;
-}
-
-
-.navigationInput {
-    width: 100%;
-    padding: 10px; 
-
-}
-
-.iconContainer {
-    background-color: white;
-}
-
-.searchIcon {
+.userImage {
+    width: 40px;
+    border-radius: 50px;
 }
 

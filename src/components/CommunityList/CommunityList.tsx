@@ -7,8 +7,6 @@ type Props = {
 };
 
 const CommunityList = ({ communities }: Props) => {
-  console.log(communities);
-
   const renderedCommunities = communities.map((community) => {
     return <CommunityCard community={community} />;
   });

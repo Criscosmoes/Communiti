@@ -15,7 +15,6 @@ type Props = {
 };
 
 export default function CommunityCard({ community }: Props) {
-  console.log(community);
   return (
     <Card
       sx={{
