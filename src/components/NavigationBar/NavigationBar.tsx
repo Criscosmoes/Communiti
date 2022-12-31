@@ -12,8 +12,9 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
-import { User } from "../../../lib/queries/models/users/users";
 import GoogleIcon from "@mui/icons-material/Google";
+import { User } from "../../../lib/models/user/User";
+import styles from "./NavigationBar.module.css";
 
 import Link from "next/link";
 
@@ -77,8 +78,6 @@ export default function NavigationBar({ user }: Props) {
     setMobileMoreAnchorEl(event.currentTarget);
   };
 
-  const menuId = "primary-search-account-menu";
-
   const mobileMenuId = "primary-search-account-menu-mobile";
   const renderMobileMenu = (
     <Menu
@@ -99,13 +98,21 @@ export default function NavigationBar({ user }: Props) {
       {user ? (
         <MenuItem onClick={handleProfileMenuOpen}>
           <IconButton
-            size="large"
+            size="medium"
             aria-label="account of current user"
             aria-controls="primary-search-account-menu"
             aria-haspopup="true"
             color="inherit"
           >
-            <AccountCircle />
+            {user.image ? (
+              <img
+                className={styles.userImage}
+                src={user.image}
+                referrerPolicy="no-referrer"
+              />
+            ) : (
+              <AccountCircle />
+            )}
           </IconButton>
           <Link href="http://localhost:5432/api/logout">Log Out</Link>
         </MenuItem>
@@ -176,7 +183,15 @@ export default function NavigationBar({ user }: Props) {
                   onClick={handleMobileMenuOpen}
                   color="inherit"
                 >
-                  <AccountCircle />
+                  {user.image ? (
+                    <img
+                      className={styles.userImage}
+                      src={user.image}
+                      referrerPolicy="no-referrer"
+                    />
+                  ) : (
+                    <AccountCircle />
+                  )}
                 </IconButton>
               </Box>
             ) : (

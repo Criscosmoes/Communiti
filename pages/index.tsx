@@ -1,20 +1,19 @@
 import Head from "next/head";
-import { Inter } from "@next/font/google";
 
 import NavigationBar from "../src/components/NavigationBar/NavigationBar";
 import Dashboard from "../src/components/Dashboard/Dashboard";
 
-import { checkIfLoggedIn } from "../lib/queries/models/users/helper";
-import { User } from "../lib/queries/models/users/users";
-import axios from "axios";
-
-const inter = Inter({ subsets: ["latin"] });
+import { checkIfLoggedIn } from "../lib/models/user/helper";
+import { User } from "../lib/models/user/User";
+import { getCommunities } from "../lib/models/community/queries";
+import { Community } from "../lib/models/community/Community";
 
 type Props = {
   user: User;
+  communities: Community[];
 };
 
-export default function Home({ user }: Props) {
+export default function Home({ user, communities }: Props) {
   return (
     <>
       <Head>
@@ -24,7 +23,7 @@ export default function Home({ user }: Props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <NavigationBar user={user} />
-      <Dashboard />
+      <Dashboard communities={communities} />
     </>
   );
 }
@@ -34,7 +33,9 @@ export async function getServerSideProps(context: any) {
     `connect.sid=${context.req.cookies["connect.sid"]}`
   );
 
+  const communities = await getCommunities();
+
   return {
-    props: { user },
+    props: { user, communities },
   };
 }

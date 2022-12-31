@@ -29,6 +29,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	background-color: #17181C;
 
 }
 ol, ul {
@@ -68,3 +69,4 @@ a {
 	border: 1px solid #56575A;
 	cursor: pointer;
 }
+
