@@ -14,6 +14,14 @@ const getRecentlyAddedCommunities = async () => {
   return communities.data;
 };
 
+const getCommunitiesByTerm = async (term: string) => {
+  const communities = await axios.get(
+    `http://localhost:5432/api/communities/${term}`
+  );
+
+  return communities.data;
+};
+
 const getPopularCommunities = async () => {
   const communities = await axios.get(
     "http://localhost:5432/api/popular_communities"
@@ -22,4 +30,9 @@ const getPopularCommunities = async () => {
   return communities.data;
 };
 
-export { getCommunities, getRecentlyAddedCommunities, getPopularCommunities };
+export {
+  getCommunities,
+  getRecentlyAddedCommunities,
+  getPopularCommunities,
+  getCommunitiesByTerm,
+};
