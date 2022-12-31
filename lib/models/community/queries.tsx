@@ -6,4 +6,12 @@ const getCommunities = async () => {
   return communities.data;
 };
 
-export { getCommunities };
+const getRecentlyAddedCommunities = async () => {
+  const communities = await axios.get(
+    "http://localhost:5432/api/recent_communities"
+  );
+
+  return communities.data;
+};
+
+export { getCommunities, getRecentlyAddedCommunities };
