@@ -2,7 +2,7 @@ import * as React from "react";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Autocomplete from "@mui/material/Autocomplete";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import debounce from "lodash.debounce";
 import { useRouter } from "next/router";
 
@@ -16,6 +16,10 @@ export default function SearchInput() {
   const [totalOptions, setTotalOptions] = useState<Community[]>([]);
 
   const deboucedValue = debounce((value) => {
+    if (!value) {
+      return;
+    }
+
     onInputChange(value);
   }, 400);
 
@@ -37,6 +41,10 @@ export default function SearchInput() {
   };
 
   const onSelect = (e: any, value: string | null) => {
+    if (!value) {
+      return;
+    }
+
     const community = totalOptions.find(
       (community) => value === community.community_name
     );
@@ -51,12 +59,12 @@ export default function SearchInput() {
         renderInput={(params) => {
           return <TextField {...params} />;
         }}
-        onInputChange={(e: any) => deboucedValue(e.target.value)}
-        clearOnBlur={false}
-        clearOnEscape={false}
+        onInputChange={(e: any) => deboucedValue(e?.target.value)}
         noOptionsText="No Communities found"
+        clearOnEscape={true}
         popupIcon={""}
         onChange={(e, value) => onSelect(e, value)}
+        value={userInput}
       />
     </Stack>
   );
