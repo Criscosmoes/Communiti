@@ -54,7 +54,8 @@ export default function CommunityCard({ community }: Props) {
           size="medium"
           sx={{ color: "white", backgroundColor: "#2C87FC", marginLeft: 1 }}
         >
-          <AddIcon />
+          <Typography sx={{ color: "white" }}>Follow</Typography>
+          <AddIcon sx={{ marginLeft: 1 }} />
         </Button>
       </CardActions>
     </Card>

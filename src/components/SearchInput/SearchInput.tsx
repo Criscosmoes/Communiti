@@ -57,14 +57,20 @@ export default function SearchInput() {
       <Autocomplete
         options={totalOptions.map((option) => option.community_name)}
         renderInput={(params) => {
-          return <TextField {...params} />;
+          return (
+            <TextField
+              {...params}
+              value={userInput}
+              placeholder="Search Communities"
+            />
+          );
         }}
         onInputChange={(e: any) => deboucedValue(e?.target.value)}
-        noOptionsText="No Communities found"
+        noOptionsText="No communities found"
         clearOnEscape={true}
+        clearOnBlur={true}
         popupIcon={""}
         onChange={(e, value) => onSelect(e, value)}
-        value={userInput}
       />
     </Stack>
   );

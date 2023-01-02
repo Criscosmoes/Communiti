@@ -79,6 +79,7 @@ a {
 
 .link {
 	color: white; 
+	cursor: pointer;
 }
 
 .link:hover {
