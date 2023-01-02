@@ -77,6 +77,15 @@ a {
 	
 }
 
+.link {
+	color: white; 
+}
+
+.link:hover {
+	text-decoration: underline;
+}
+
+
 .css-1ej5eh4-MuiInputBase-root-MuiOutlinedInput-root {
 	color: white !important; 
 	border: none !important;

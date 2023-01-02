@@ -14,8 +14,8 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import GoogleIcon from "@mui/icons-material/Google";
 import { User } from "../../../lib/models/user/User";
-import styles from "./NavigationBar.module.css";
 import SearchInput from "../SearchInput/SearchInput";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 import Link from "next/link";
 
@@ -45,25 +45,12 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   justifyContent: "center",
 }));
 
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
-  "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-  },
-}));
-
-type Props = {
-  user: User;
-};
-
-export default function NavigationBar({ user }: Props) {
+export default function NavigationBar() {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
+
+  const { data: session } = useSession();
 
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
 
@@ -96,7 +83,7 @@ export default function NavigationBar({ user }: Props) {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      {user ? (
+      {session?.user ? (
         <MenuItem onClick={handleProfileMenuOpen}>
           <IconButton
             size="medium"
@@ -105,17 +92,19 @@ export default function NavigationBar({ user }: Props) {
             aria-haspopup="true"
             color="inherit"
           >
-            {user.image ? (
+            {session?.user.image ? (
               <img
                 className="user-image"
-                src={user.image}
+                src={session?.user.image}
                 referrerPolicy="no-referrer"
               />
             ) : (
               <AccountCircle />
             )}
           </IconButton>
-          <Link href="http://localhost:5432/api/logout">Log Out</Link>
+          <IconButton size="small" onClick={() => signOut()}>
+            Log Out
+          </IconButton>
         </MenuItem>
       ) : (
         <MenuItem onClick={handleProfileMenuOpen}>
@@ -170,7 +159,7 @@ export default function NavigationBar({ user }: Props) {
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }} />
 
           <Box sx={{ display: { xs: "none", md: "flex" } }}>
-            {user ? (
+            {session?.user ? (
               <Box sx={{ display: { xs: "none", md: "flex" } }}>
                 <IconButton
                   size="large"
@@ -180,10 +169,10 @@ export default function NavigationBar({ user }: Props) {
                   onClick={handleMobileMenuOpen}
                   color="inherit"
                 >
-                  {user.image ? (
+                  {session?.user.image ? (
                     <img
                       className="user-image"
-                      src={user.image}
+                      src={session?.user.image}
                       referrerPolicy="no-referrer"
                     />
                   ) : (
@@ -192,13 +181,12 @@ export default function NavigationBar({ user }: Props) {
                 </IconButton>
               </Box>
             ) : (
-              <Link href="http://localhost:5432/auth/google">
-                <button className="google-button">
-                  <GoogleIcon /> <h2>Log in with Google</h2>
-                </button>
-              </Link>
+              <button onClick={() => signIn()} className="google-button">
+                <GoogleIcon /> <h2>Log in with Google</h2>
+              </button>
             )}
           </Box>
+
           <Box sx={{ display: { xs: "flex", md: "none" } }}>
             <IconButton
               size="large"

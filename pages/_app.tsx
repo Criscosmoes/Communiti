@@ -3,14 +3,21 @@ import type { AppProps } from "next/app";
 import { ThemeProvider } from "@mui/material/styles";
 import theme from "../styles/theme";
 import NextNProgress from "nextjs-progressbar";
-import { isAuthenticated } from "../src/hooks/isAuthenticated";
+import { SessionProvider } from "next-auth/react";
+import { Session } from "next-auth";
+import NavigationBar from "../src/components/NavigationBar/NavigationBar";
 
-export default function App({ Component, pageProps }: AppProps) {
-  const user = isAuthenticated();
+export default function App({
+  Component,
+  pageProps,
+}: AppProps<{ session: Session }>) {
   return (
-    <ThemeProvider theme={theme}>
-      <NextNProgress />
-      <Component {...pageProps} />
-    </ThemeProvider>
+    <SessionProvider session={pageProps.session}>
+      <ThemeProvider theme={theme}>
+        <NextNProgress />
+        <NavigationBar />
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </SessionProvider>
   );
 }

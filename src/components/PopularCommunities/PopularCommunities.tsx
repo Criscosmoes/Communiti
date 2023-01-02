@@ -4,6 +4,7 @@ import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
 import { Community } from "../../../lib/models/community/Community";
+import Link from "next/link";
 
 type Props = {
   popularCommunities: Community[];
@@ -13,7 +14,9 @@ export default function PopularCommunities({ popularCommunities }: Props) {
   const renderedCommunities = popularCommunities.map((community) => {
     return (
       <CardContent key={community.community_id}>
-        <Typography variant="h5">{community.community_name}</Typography>
+        <Link className="link" href={`/community/${community.community_id}`}>
+          <Typography variant="h5">{community.community_name}</Typography>
+        </Link>
         <Typography sx={{ color: "#898B8F" }}>{community.caption}</Typography>
       </CardContent>
     );

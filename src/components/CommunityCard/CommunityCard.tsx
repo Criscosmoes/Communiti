@@ -40,20 +40,19 @@ export default function CommunityCard({ community }: Props) {
       />
       <CardContent></CardContent>
       <CardActions>
+        <Link href={`/community/${community.community_id}`}>
+          <Button
+            size="medium"
+            sx={{ color: "white", backgroundColor: "#2C87FC" }}
+          >
+            <Typography sx={{ color: "white" }}>Go to Community</Typography>
+
+            <ArrowForwardIcon sx={{ marginLeft: 1 }} />
+          </Button>
+        </Link>
         <Button
           size="medium"
-          sx={{ color: "white", backgroundColor: "#2C87FC" }}
-        >
-          <Link href={`/community/${community.community_id}`}>
-            <Typography sx={{ marginRight: 1, color: "white" }}>
-              Go to Community
-            </Typography>
-          </Link>
-          <ArrowForwardIcon />
-        </Button>
-        <Button
-          size="medium"
-          sx={{ color: "white", backgroundColor: "#2C87FC" }}
+          sx={{ color: "white", backgroundColor: "#2C87FC", marginLeft: 1 }}
         >
           <AddIcon />
         </Button>
