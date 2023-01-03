@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
 import IconButton from "@mui/material/IconButton";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+import ReactTimeAgo from "react-time-ago";
 
 import { Post } from "../../../lib/models/post/Post";
 
@@ -28,7 +29,8 @@ export default function PostList({ posts }: Props) {
       >
         <CardContent>
           <Typography sx={{ color: "#787C7E" }}>
-            Posted by {post.username} 10/10/23
+            Posted by {post.username}{" "}
+            <ReactTimeAgo date={new Date(post.created_on)} locale="en-US" />
           </Typography>
         </CardContent>
         <CardContent>
