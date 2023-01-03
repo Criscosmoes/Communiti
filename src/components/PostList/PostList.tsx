@@ -8,6 +8,7 @@ import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import ReactTimeAgo from "react-time-ago";
 
 import { Post } from "../../../lib/models/post/Post";
+import AddPostForm from "../AddPostForm/AddPostForm";
 
 type Props = {
   posts: Post[];
@@ -54,5 +55,10 @@ export default function PostList({ posts }: Props) {
     );
   });
 
-  return <>{renderedPosts}</>;
+  return (
+    <>
+      <AddPostForm />
+      {renderedPosts}
+    </>
+  );
 }
