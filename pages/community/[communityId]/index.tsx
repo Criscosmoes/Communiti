@@ -7,9 +7,11 @@ import { getCommunityById } from "../../../lib/models/community/queries";
 import { Community } from "../../../lib/models/community/Community";
 import CommunityTitleCard from "../../../src/components/CommunityTitleCard/CommunityTitleCard";
 import AboutCommunity from "../../../src/components/AboutCommunity/AboutCommunity";
-import { getPostsByCommunityId } from "../../../lib/models/post/querires";
+import { getPostsByCommunityId } from "../../../lib/models/post/queries";
 import { Post } from "../../../lib/models/post/Post";
 import PostList from "../../../src/components/PostList/PostList";
+import { useSession, signIn, signOut } from "next-auth/react";
+import { User } from "next-auth";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -25,6 +27,8 @@ type Props = {
 };
 
 export default function CommunityPage({ community, posts }: Props) {
+  const { data: session } = useSession();
+
   return (
     <Box>
       <Grid container>
@@ -37,7 +41,11 @@ export default function CommunityPage({ community, posts }: Props) {
         <Grid md={8} xs={12} lg={6} item>
           <Item sx={{ backgroundColor: "#17181C" }}>
             <CommunityTitleCard community={community} />
-            <PostList posts={posts} />
+            <PostList
+              posts={posts}
+              user={session?.user!}
+              community={community}
+            />
           </Item>
         </Grid>
         <Grid sx={{ display: { xs: "none", md: "block" } }} md={4} lg={3} item>
@@ -54,8 +62,6 @@ export async function getServerSideProps(context: any) {
   const community = await getCommunityById(context.params.communityId);
 
   const posts: Post[] = await getPostsByCommunityId(context.params.communityId);
-
-  console.log(posts);
 
   return {
     props: {

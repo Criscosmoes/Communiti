@@ -1,6 +1,8 @@
 import NextAuth from "next-auth/next";
 import GoogleProvider from "next-auth/providers/google";
 import axios from "axios";
+import { getUserByOauthId } from "../../../lib/models/user/queries";
+import { User } from "../../../lib/models/user/User";
 
 export default NextAuth({
   providers: [
@@ -27,6 +29,15 @@ export default NextAuth({
       });
 
       return true;
+    },
+    async session({ session, token, user }) {
+      // Send properties to the client, like an access_token and user id from a provider.
+
+      const currentUser: User = await getUserByOauthId(token?.sub!);
+
+      session.user.user_id = currentUser.user_id;
+
+      return session;
     },
   },
 });

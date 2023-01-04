@@ -7,5 +7,5 @@ export interface Post {
   user_id: number;
   created_on: string;
   username?: string;
-  comment_count: string;
+  comment_count?: string;
 }

@@ -9,10 +9,8 @@ import NavigationBar from "../src/components/NavigationBar/NavigationBar";
 
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en.json";
-import ru from "javascript-time-ago/locale/ru.json";
 
-TimeAgo.addDefaultLocale(en);
-TimeAgo.addLocale(ru);
+TimeAgo.addLocale(en);
 
 export default function App({
   Component,
