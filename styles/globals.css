@@ -185,3 +185,11 @@ a {
 .community-input:hover {
 	border-color: #2C87FC;
 }
+
+
+@media (max-width: 800px) {
+
+	.css-1lfp3xa {
+		width: 100% !important; 
+	}
+}

@@ -12,6 +12,7 @@ import AccountCircle from "@mui/icons-material/AccountCircle";
 import { signIn } from "next-auth/react";
 import { addPost } from "../../../lib/models/post/queries";
 import { Post } from "../../../lib/models/post/Post";
+import { toast } from "react-toastify";
 
 const style = {
   position: "absolute" as "absolute",
@@ -58,9 +59,12 @@ const AddPostForm = ({ user, community, setCurrentPosts }: Props) => {
         return [...prevState, newPost];
       });
 
+      toast.success("Successfully added post", { position: "bottom-left" });
+
       handleClose();
       resetForm();
     } catch (error) {
+      toast.error("Error, please check console");
       console.log(error);
     }
   };
