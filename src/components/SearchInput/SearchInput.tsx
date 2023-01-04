@@ -2,7 +2,7 @@ import * as React from "react";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Autocomplete from "@mui/material/Autocomplete";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import debounce from "lodash.debounce";
 import { useRouter } from "next/router";
 
@@ -16,6 +16,10 @@ export default function SearchInput() {
   const [totalOptions, setTotalOptions] = useState<Community[]>([]);
 
   const deboucedValue = debounce((value) => {
+    if (!value) {
+      return;
+    }
+
     onInputChange(value);
   }, 400);
 
@@ -37,6 +41,10 @@ export default function SearchInput() {
   };
 
   const onSelect = (e: any, value: string | null) => {
+    if (!value) {
+      return;
+    }
+
     const community = totalOptions.find(
       (community) => value === community.community_name
     );
@@ -49,12 +57,18 @@ export default function SearchInput() {
       <Autocomplete
         options={totalOptions.map((option) => option.community_name)}
         renderInput={(params) => {
-          return <TextField {...params} />;
+          return (
+            <TextField
+              {...params}
+              value={userInput}
+              placeholder="Search Communities"
+            />
+          );
         }}
-        onInputChange={(e: any) => deboucedValue(e.target.value)}
-        clearOnBlur={false}
-        clearOnEscape={false}
-        noOptionsText="No Communities found"
+        onInputChange={(e: any) => deboucedValue(e?.target.value)}
+        noOptionsText="No communities found"
+        clearOnEscape={true}
+        clearOnBlur={true}
         popupIcon={""}
         onChange={(e, value) => onSelect(e, value)}
       />

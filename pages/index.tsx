@@ -1,9 +1,7 @@
 import Head from "next/head";
 
-import NavigationBar from "../src/components/NavigationBar/NavigationBar";
 import Dashboard from "../src/components/Dashboard/Dashboard";
 
-import { checkIfLoggedIn } from "../lib/models/user/helper";
 import { User } from "../lib/models/user/User";
 import {
   getCommunities,
@@ -36,7 +34,6 @@ export default function Home({
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <NavigationBar user={user} />
       <Dashboard
         communities={communities}
         recentlyAddedCommunities={recentlyAddedCommunities}
@@ -48,10 +45,6 @@ export default function Home({
 }
 
 export async function getServerSideProps(context: any) {
-  const user = await checkIfLoggedIn(
-    `connect.sid=${context.req.cookies["connect.sid"]}`
-  );
-
   const communities = await getCommunities();
 
   const recentlyAddedCommunities = await getRecentlyAddedCommunities();
@@ -62,7 +55,6 @@ export async function getServerSideProps(context: any) {
 
   return {
     props: {
-      user,
       communities,
       recentlyAddedCommunities,
       popularCommunities,

@@ -16,7 +16,7 @@ menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	margin: 0;
 	padding: 0;
-	border: 0;
+	/* border: 0; */
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
@@ -77,6 +77,16 @@ a {
 	
 }
 
+.link {
+	color: white; 
+	cursor: pointer;
+}
+
+.link:hover {
+	text-decoration: underline;
+}
+
+
 .css-1ej5eh4-MuiInputBase-root-MuiOutlinedInput-root {
 	color: white !important; 
 	border: none !important;
@@ -95,4 +105,83 @@ a {
 
 .css-1qqsdnr-MuiAutocomplete-root .MuiOutlinedInput-root {
 	padding: 5px !important
+}
+
+
+.form-container {
+	width: 95%;
+	max-width: 400px;
+	margin: 0 auto;
+	font-family: 'Ubuntu', sans-serif;
+
+}
+
+.form-label {
+
+	font-size: 1.1rem;
+	display: block;
+	text-align: left;
+	margin: 10px 1px;
+	color: white
+
+}
+
+.form-input {
+	width: 100%;
+  padding: 13px; 
+  font-size: 1rem;
+  color: white;
+  border: 2px solid #4a5568;
+  background-color: #2d3748;
+  border-radius: 10px;
+  outline: none;
+  margin: 10px 0px; 
+}
+
+.form-input:focus {
+	border-color: #2C87FC;
+}
+
+.form-input::placeholder {
+	border-color: #2C87FC;
+}
+
+.form-input[type="checkbox"] {
+	width: fit-content;
+  margin-right: 0.5rem;
+  transform: scale(1.25);
+}
+
+.form-button {
+  margin: 2rem 0;
+  padding: 13px;
+  background-color: #2C87FC;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  width: 100%;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.input-error {
+	border-color: #fc8181;
+
+}
+
+.error {
+	color: #fc8181;
+	margin-bottom: 30px;
+
+}
+
+.community-input {
+	flex-grow: 1;
+	margin-left: 20px;
+	padding-left: 10px;  
+	outline: none; 
+}
+
+.community-input:hover {
+	border-color: #2C87FC;
 }

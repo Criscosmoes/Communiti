@@ -9,6 +9,7 @@ import AddIcon from "@mui/icons-material/Add";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
 
 import { Community } from "../../../lib/models/community/Community";
+import Link from "next/link";
 
 type Props = {
   community: Community;
@@ -39,18 +40,22 @@ export default function CommunityCard({ community }: Props) {
       />
       <CardContent></CardContent>
       <CardActions>
+        <Link href={`/community/${community.community_id}`}>
+          <Button
+            size="medium"
+            sx={{ color: "white", backgroundColor: "#2C87FC" }}
+          >
+            <Typography sx={{ color: "white" }}>Go to Community</Typography>
+
+            <ArrowForwardIcon sx={{ marginLeft: 1 }} />
+          </Button>
+        </Link>
         <Button
           size="medium"
-          sx={{ color: "white", backgroundColor: "#2C87FC" }}
+          sx={{ color: "white", backgroundColor: "#2C87FC", marginLeft: 1 }}
         >
-          <Typography sx={{ marginRight: 1 }}>Go to Community</Typography>{" "}
-          <ArrowForwardIcon />
-        </Button>
-        <Button
-          size="medium"
-          sx={{ color: "white", backgroundColor: "#2C87FC" }}
-        >
-          <AddIcon />
+          <Typography sx={{ color: "white" }}>Follow</Typography>
+          <AddIcon sx={{ marginLeft: 1 }} />
         </Button>
       </CardActions>
     </Card>

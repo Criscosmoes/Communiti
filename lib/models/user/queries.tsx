@@ -6,4 +6,10 @@ const getRecentyAddedUsers = async () => {
   return users.data;
 };
 
-export { getRecentyAddedUsers };
+const getUserByOauthId = async (id: string) => {
+  const user = await axios.get(`http://localhost:5432/api/users/user/${id}`);
+
+  return user.data;
+};
+
+export { getRecentyAddedUsers, getUserByOauthId };

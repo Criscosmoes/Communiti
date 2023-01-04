@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import CardActions from "@mui/material/CardActions";
 import { Community } from "../../../lib/models/community/Community";
+import Link from "next/link";
 
 type Props = {
   recentlyAddedCommunities: Community[];
@@ -16,7 +17,9 @@ export default function RecentlyAddedCommunities({
   const renderedCommunities = recentlyAddedCommunities.map((community) => {
     return (
       <CardContent key={community.community_id}>
-        <Typography variant="h5">{community.community_name}</Typography>
+        <Link className="link" href={`/community/${community.community_id}`}>
+          <Typography variant="h5">{community.community_name}</Typography>
+        </Link>
         <Typography sx={{ color: "#898B8F" }}>{community.caption}</Typography>
       </CardContent>
     );

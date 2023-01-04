@@ -30,9 +30,18 @@ const getPopularCommunities = async () => {
   return communities.data;
 };
 
+const getCommunityById = async (id: string) => {
+  const community = await axios.get(
+    `http://localhost:5432/api/communities/id/${id}`
+  );
+
+  return community.data;
+};
+
 export {
   getCommunities,
   getRecentlyAddedCommunities,
   getPopularCommunities,
   getCommunitiesByTerm,
+  getCommunityById,
 };
