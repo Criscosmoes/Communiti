@@ -41,11 +41,7 @@ const AddPostForm = ({ user, community, setCurrentPosts }: Props) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  console.log(community);
-
   const onSubmit = async (values: any, actions: any) => {
-    console.log(values);
-
     try {
       const post: Post = {
         ...values,

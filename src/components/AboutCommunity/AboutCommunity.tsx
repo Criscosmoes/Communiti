@@ -18,8 +18,7 @@ export default function AboutCommunity({ community }: Props) {
     <Card
       sx={{
         minWidth: 275,
-        marginBottom: 2,
-        marginTop: 2,
+        margin: "20px 0px",
         backgroundColor: "#1E1F23",
         color: "white",
         border: "2px solid #56575A",

@@ -5,14 +5,18 @@ import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
 import IconButton from "@mui/material/IconButton";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import ReactTimeAgo from "react-time-ago";
-import { useState } from "react";
+import Modal from "@mui/material/Modal";
+import { useState, useEffect } from "react";
 
 import { Post } from "../../../lib/models/post/Post";
 import AddPostForm from "../AddPostForm/AddPostForm";
 import { Box } from "@mui/material";
 import { User } from "next-auth";
 import { Community } from "../../../lib/models/community/Community";
+import DeleteModal from "../DeleteModal/DeleteModal";
+import { deletePost } from "../../../lib/models/post/queries";
 
 type Props = {
   posts: Post[];
@@ -21,7 +25,21 @@ type Props = {
 };
 
 export default function PostList({ posts, user, community }: Props) {
+  console.log(posts, "new posts");
   const [currentPosts, setCurrentPosts] = useState<Post[]>(posts);
+  console.log(currentPosts, "new posts");
+
+  const onSubmit = async (post: Post) => {
+    await deletePost(post.post_id!);
+
+    setCurrentPosts((prevState) => {
+      const newPosts = prevState.filter(
+        (oldPost) => oldPost.post_id !== post.post_id
+      );
+
+      return newPosts;
+    });
+  };
 
   const renderedPosts = currentPosts.map((post) => {
     const now = new Date(post.created_on);
@@ -40,7 +58,8 @@ export default function PostList({ posts, user, community }: Props) {
       >
         <CardContent>
           <Typography sx={{ color: "#787C7E" }}>
-            Posted by {post.username} <ReactTimeAgo date={now} locale="en-US" />
+            Posted by {post.username || user.name}
+            <ReactTimeAgo date={now} locale="en-US" />
           </Typography>
         </CardContent>
         <CardContent>
@@ -56,13 +75,33 @@ export default function PostList({ posts, user, community }: Props) {
           <IconButton sx={{ color: "white" }}>
             <ChatBubbleOutlineIcon />
             <Typography sx={{ marginLeft: 1 }} variant="h5">
-              {post.comment_count} comments
+              {post.comment_count || 0} Comments
             </Typography>
           </IconButton>
+          {user?.user_id === post.user_id ? (
+            <DeleteModal
+              openButton={
+                <IconButton sx={{ color: "white" }}>
+                  <DeleteOutlineIcon />
+                  <Typography sx={{ marginLeft: 1 }} variant="h5">
+                    Delete Post
+                  </Typography>
+                </IconButton>
+              }
+              onSubmit={() => onSubmit(post)}
+              item={post}
+            />
+          ) : (
+            ""
+          )}
         </CardActions>
       </Card>
     );
   });
+
+  useEffect(() => {
+    setCurrentPosts(posts);
+  }, [posts]);
 
   return (
     <Box>
