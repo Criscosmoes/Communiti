@@ -6,6 +6,8 @@ import Button from "@mui/material/Button";
 import CardActions from "@mui/material/CardActions";
 import { Community } from "../../../lib/models/community/Community";
 import Link from "next/link";
+import FormModal from "../../global/components/Modal/FormModal";
+import AddCommunityForm from "../AddCommunityForm/AddCommunityForm";
 
 type Props = {
   recentlyAddedCommunities: Community[];
@@ -44,12 +46,7 @@ export default function RecentlyAddedCommunities({
       <CardActions
         sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
       >
-        <Button
-          size="medium"
-          sx={{ color: "white", backgroundColor: "#2C87FC" }}
-        >
-          Add Community
-        </Button>
+        <AddCommunityForm />
       </CardActions>
     </Card>
   );

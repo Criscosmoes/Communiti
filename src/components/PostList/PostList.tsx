@@ -25,9 +25,7 @@ type Props = {
 };
 
 export default function PostList({ posts, user, community }: Props) {
-  console.log(posts, "new posts");
   const [currentPosts, setCurrentPosts] = useState<Post[]>(posts);
-  console.log(currentPosts, "new posts");
 
   const onSubmit = async (post: Post) => {
     await deletePost(post.post_id!);
@@ -58,7 +56,7 @@ export default function PostList({ posts, user, community }: Props) {
       >
         <CardContent>
           <Typography sx={{ color: "#787C7E" }}>
-            Posted by {post.username || user.name}
+            Posted by {post.username || user.name}{" "}
             <ReactTimeAgo date={now} locale="en-US" />
           </Typography>
         </CardContent>
