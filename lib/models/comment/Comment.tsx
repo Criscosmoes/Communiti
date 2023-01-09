@@ -6,4 +6,5 @@ export interface IComment {
   community_id?: number;
   post_id?: number;
   created_on: string;
+  username?: string;
 }

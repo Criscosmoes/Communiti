@@ -17,4 +17,8 @@ const getCommentsByPostId = async (id: number) => {
 
   return comments.data;
 };
-export { addComment, getCommentsByPostId };
+
+const deleteComment = async (id: number) => {
+  await axios.delete(`http://localhost:5432/api/comments/delete/${id}`);
+};
+export { addComment, getCommentsByPostId, deleteComment };

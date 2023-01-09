@@ -1,21 +1,36 @@
-import { Comment } from "../../../lib/models/comment/Comment";
+import { IComment } from "../../../lib/models/comment/Comment";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
 import CardActions from "@mui/material/CardActions";
 import IconButton from "@mui/material/IconButton";
-import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import ReactTimeAgo from "react-time-ago";
-import Modal from "@mui/material/Modal";
-import { useState, useEffect } from "react";
-import CommentsModal from "../CommentsModal/CommentsModal";
+import DeleteModal from "../DeleteModal/DeleteModal";
+import { useSession } from "next-auth/react";
+import { deleteComment } from "../../../lib/models/comment/queries";
+import { Dispatch, SetStateAction } from "react";
 
 type Props = {
-  comment: Comment;
+  comment: IComment;
+  setComments: Dispatch<SetStateAction<IComment[]>>;
 };
 
-const Comment = ({ comment }: Props) => {
+const Comment = ({ comment, setComments }: Props) => {
+  const { data: session } = useSession();
+
+  const onDelete = async (comment: IComment) => {
+    await deleteComment(comment.comment_id);
+
+    setComments((prevState) => {
+      const newComments = prevState.filter(
+        (oldComment) => oldComment.comment_id !== comment.comment_id
+      );
+
+      return newComments;
+    });
+  };
+
   return (
     <Card
       key={comment.comment_id}
@@ -30,7 +45,7 @@ const Comment = ({ comment }: Props) => {
     >
       <CardContent>
         <Typography sx={{ color: "#787C7E" }}>
-          Posted by Cristian {/* {comment.username || user.name}{" "} */}
+          Posted by {comment.username}{" "}
           <ReactTimeAgo date={new Date(comment.created_on)} locale="en-US" />
         </Typography>
       </CardContent>
@@ -43,7 +58,7 @@ const Comment = ({ comment }: Props) => {
         </a>
       </CardContent>
       <CardActions>
-        {/* {user?.user_id === post.user_id ? (
+        {session?.user?.user_id! === comment.user_id ? (
           <DeleteModal
             openButton={
               <IconButton sx={{ color: "white" }}>
@@ -53,12 +68,12 @@ const Comment = ({ comment }: Props) => {
                 </Typography>
               </IconButton>
             }
-            onSubmit={() => onSubmit(post)}
-            item={post}
+            onSubmit={() => onDelete(comment)}
+            item={comment}
           />
         ) : (
           ""
-        )} */}
+        )}
       </CardActions>
     </Card>
   );
