@@ -4,15 +4,18 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { useState } from "react";
+import FormData from "form-data";
 
-import { PostSchema } from "../../FormSchemas";
+import { CommunitySchema, PostSchema } from "../../FormSchemas";
 import { Community } from "../../../lib/models/community/Community";
 import { User } from "next-auth";
 import AccountCircle from "@mui/icons-material/AccountCircle";
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { addPost } from "../../../lib/models/post/queries";
 import { Post } from "../../../lib/models/post/Post";
 import { toast } from "react-toastify";
+import { addCommunity } from "../../../lib/models/community/queries";
+import { useRouter } from "next/router";
 
 const style = {
   position: "absolute" as "absolute",
@@ -30,37 +33,30 @@ const style = {
   flexDirection: "column",
 };
 
-type Props = {
-  user?: User;
-  community: Community;
-  setCurrentPosts: React.Dispatch<React.SetStateAction<Post[]>>;
-};
-
-const AddPostForm = ({ user, community, setCurrentPosts }: Props) => {
+const AddCommunityForm = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
 
-  const onSubmit = async (values: any, actions: any) => {
+  const { data: session } = useSession();
+  const router = useRouter();
+
+  const onFormSubmit = async (values: any, actions: any) => {
+    console.log(values);
+
     try {
-      const post: Post = {
-        ...values,
-        user_id: user.user_id,
-        community_id: community.community_id,
-      };
+      const form = new FormData();
+      const community: Community = values;
 
-      const newPost = await addPost(post);
+      form.append("image", community.image);
+      form.append("community_name", community.community_name);
+      form.append("description", community.description);
+      form.append("caption", community.caption);
 
-      setCurrentPosts((prevState) => {
-        return [...prevState, newPost];
-      });
+      const newCommunity: Community = await addCommunity(form);
 
-      toast.success("Successfully added post", { position: "bottom-left" });
-
-      handleClose();
-      resetForm();
+      router.push(`/community/${newCommunity.community_id}`);
     } catch (error) {
-      toast.error("Error, please check console");
       console.log(error);
     }
   };
@@ -77,60 +73,38 @@ const AddPostForm = ({ user, community, setCurrentPosts }: Props) => {
     isSubmitting,
     handleBlur,
     handleChange,
+    setFieldValue,
     handleSubmit,
     resetForm,
   } = useFormik({
     initialValues: {
-      title: "",
+      image: "",
+      community_name: "",
       description: "",
-      post_link: "",
+      caption: "",
     },
-    onSubmit: onSubmit,
-    validationSchema: PostSchema,
+    onSubmit: onFormSubmit,
+    validationSchema: CommunitySchema,
   });
 
   return (
     <div>
-      {user ? (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-evenly",
-            alignContent: "center",
-          }}
+      {session?.user ? (
+        <Button
+          size="medium"
+          sx={{ color: "white", backgroundColor: "#2C87FC" }}
+          onClick={handleOpen}
         >
-          <img
-            className="user-image"
-            src={user?.image!}
-            referrerPolicy="no-referrer"
-          />
-          <input
-            className="community-input"
-            type="text"
-            placeholder="Create Post"
-            onClick={() => handleOpen()}
-            readOnly={true}
-          />
-        </Box>
+          Create Community
+        </Button>
       ) : (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-evenly",
-            alignContent: "center",
-            color: "white",
-            height: 40,
-          }}
+        <Button
+          size="medium"
+          sx={{ color: "white", backgroundColor: "#2C87FC" }}
+          onClick={() => signIn()}
         >
-          <AccountCircle sx={{ fontSize: "40px" }} className="user-image" />
-          <input
-            className="community-input"
-            type="text"
-            placeholder="Create Post"
-            onClick={() => signIn()}
-            readOnly={true}
-          />
-        </Box>
+          Create Community
+        </Button>
       )}
       <Modal
         open={open}
@@ -144,22 +118,42 @@ const AddPostForm = ({ user, community, setCurrentPosts }: Props) => {
             Create A Post
           </Typography>
           <form className="form-container" onSubmit={handleSubmit}>
-            <label className="form-label">Title</label>
+            <label className="form-label">Community Name</label>
             <input
               onChange={handleChange}
-              value={values.title}
-              id="title"
+              value={values.community_name}
+              id="community_name"
               type="text"
-              placeholder="Enter a title"
+              placeholder="Enter a Community Name"
               onBlur={handleBlur}
               className={
-                errors.title && touched.title
+                errors.community_name && touched.community_name
                   ? "form-input input-error"
                   : "form-input"
               }
             />
-            {errors.title && touched.title ? (
-              <p className="error">{errors.title}</p>
+            {errors.community_name && touched.community_name ? (
+              <p className="error">{errors.community_name}</p>
+            ) : (
+              ""
+            )}
+
+            <label className="form-label">Caption</label>
+            <input
+              value={values.caption}
+              onChange={handleChange}
+              id="caption"
+              type="text"
+              placeholder="Enter a caption"
+              onBlur={handleBlur}
+              className={
+                errors.caption && touched.caption
+                  ? "form-input input-error"
+                  : "form-input"
+              }
+            />
+            {errors.caption && touched.caption ? (
+              <p className="error">{errors.caption}</p>
             ) : (
               ""
             )}
@@ -185,23 +179,21 @@ const AddPostForm = ({ user, community, setCurrentPosts }: Props) => {
               ""
             )}
 
-            <label className="form-label">Link</label>
+            <label className="form-label">Image</label>
             <input
-              value={values.post_link}
-              onChange={handleChange}
-              id="post_link"
-              type="text"
-              placeholder="Enter a link"
+              onChange={(e) => setFieldValue("image", e.target.files[0])}
+              id="image"
+              type="file"
+              placeholder="Enter a Community Name"
               onBlur={handleBlur}
               className={
-                errors.post_link && touched.post_link
+                errors.image && touched.image
                   ? "form-input input-error"
                   : "form-input"
               }
             />
-
-            {errors.post_link && touched.post_link ? (
-              <p className="error">{errors.post_link}</p>
+            {errors.image && touched.image ? (
+              <p className="error">{errors.image}</p>
             ) : (
               ""
             )}
@@ -220,4 +212,4 @@ const AddPostForm = ({ user, community, setCurrentPosts }: Props) => {
   );
 };
 
-export default AddPostForm;
+export default AddCommunityForm;

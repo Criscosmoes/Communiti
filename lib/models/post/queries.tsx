@@ -15,4 +15,8 @@ const addPost = async (post: Post) => {
   return newPost.data;
 };
 
-export { getPostsByCommunityId, addPost };
+const deletePost = async (id: number) => {
+  await axios.delete(`http://localhost:5432/api/posts/${id}`);
+};
+
+export { getPostsByCommunityId, addPost, deletePost };

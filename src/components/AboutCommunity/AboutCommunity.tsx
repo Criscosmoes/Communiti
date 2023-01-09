@@ -8,6 +8,7 @@ import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import GroupIcon from "@mui/icons-material/Group";
 import DescriptionIcon from "@mui/icons-material/Description";
 import CommentIcon from "@mui/icons-material/Comment";
+import ReactTimeAgo from "react-time-ago";
 
 type Props = {
   community: Community;
@@ -18,8 +19,7 @@ export default function AboutCommunity({ community }: Props) {
     <Card
       sx={{
         minWidth: 275,
-        marginBottom: 2,
-        marginTop: 2,
+        margin: "20px 0px",
         backgroundColor: "#1E1F23",
         color: "white",
         border: "2px solid #56575A",
@@ -62,7 +62,8 @@ export default function AboutCommunity({ community }: Props) {
       >
         <AccessTimeIcon />
         <Typography sx={{ marginLeft: 1 }} variant="h6">
-          Created On 10/10/2030
+          Created{" "}
+          <ReactTimeAgo date={new Date(community.created_on)} locale="en-US" />
         </Typography>
       </CardContent>
 

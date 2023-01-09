@@ -1,5 +1,5 @@
 export interface Post {
-  post_id?: number;
+  post_id?: number | undefined;
   title: string;
   description: string;
   post_link?: string;

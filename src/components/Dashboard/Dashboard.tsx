@@ -51,13 +51,13 @@ export default function Dashboard({
         </Grid>
         <Grid sx={{ display: { xs: "none", md: "block" } }} md={4} lg={3} item>
           <Item sx={{ backgroundColor: "#17181C" }}>
-            <PopularCommunities popularCommunities={popularCommunities} />
-          </Item>
-
-          <Item sx={{ backgroundColor: "#17181C" }}>
             <RecentlyAddedCommunities
               recentlyAddedCommunities={recentlyAddedCommunities}
             />
+          </Item>
+
+          <Item sx={{ backgroundColor: "#17181C" }}>
+            <PopularCommunities popularCommunities={popularCommunities} />
           </Item>
         </Grid>
       </Grid>

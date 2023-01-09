@@ -34,7 +34,9 @@ export default function CommunityPage({ community, posts }: Props) {
       <Grid container>
         <Grid
           item
-          sx={{ display: { xs: "none", md: "none", lg: "block" } }}
+          sx={{
+            display: { xs: "none", md: "none", lg: "block" },
+          }}
           md={3}
           lg={3}
         ></Grid>
@@ -61,7 +63,7 @@ export default function CommunityPage({ community, posts }: Props) {
 export async function getServerSideProps(context: any) {
   const community = await getCommunityById(context.params.communityId);
 
-  const posts: Post[] = await getPostsByCommunityId(context.params.communityId);
+  const posts = await getPostsByCommunityId(context.params.communityId);
 
   return {
     props: {

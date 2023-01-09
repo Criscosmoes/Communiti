@@ -10,18 +10,24 @@ import NavigationBar from "../src/components/NavigationBar/NavigationBar";
 import TimeAgo from "javascript-time-ago";
 import en from "javascript-time-ago/locale/en.json";
 
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
 TimeAgo.addLocale(en);
 
 export default function App({
   Component,
   pageProps,
 }: AppProps<{ session: Session }>) {
+  console.log("rendered");
+
   return (
     <SessionProvider session={pageProps.session}>
       <ThemeProvider theme={theme}>
         <NextNProgress />
         <NavigationBar />
         <Component {...pageProps} />
+        <ToastContainer />
       </ThemeProvider>
     </SessionProvider>
   );

@@ -1,9 +1,19 @@
 import axios from "axios";
+import { Community } from "./Community";
 
 const getCommunities = async () => {
   const communities = await axios.get("http://localhost:5432/api/communities");
 
   return communities.data;
+};
+
+const addCommunity = async (community: any) => {
+  const newCommunity = await axios.post(
+    "http://localhost:5432/api/communities",
+    community
+  );
+
+  return newCommunity.data;
 };
 
 const getRecentlyAddedCommunities = async () => {
@@ -44,4 +54,5 @@ export {
   getPopularCommunities,
   getCommunitiesByTerm,
   getCommunityById,
+  addCommunity,
 };
