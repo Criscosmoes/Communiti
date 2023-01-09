@@ -9,6 +9,7 @@ import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import ReactTimeAgo from "react-time-ago";
 import Modal from "@mui/material/Modal";
 import { useState, useEffect } from "react";
+import CommentsModal from "../CommentsModal/CommentsModal";
 
 import { Post } from "../../../lib/models/post/Post";
 import AddPostForm from "../AddPostForm/AddPostForm";
@@ -73,7 +74,7 @@ export default function PostList({ posts, user, community }: Props) {
           <IconButton sx={{ color: "white" }}>
             <ChatBubbleOutlineIcon />
             <Typography sx={{ marginLeft: 1 }} variant="h5">
-              {post.comment_count || 0} Comments
+              <CommentsModal post={post} />
             </Typography>
           </IconButton>
           {user?.user_id === post.user_id ? (

@@ -1,0 +1,108 @@
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import CardContent from "@mui/material/CardContent";
+import CardActions from "@mui/material/CardActions";
+import IconButton from "@mui/material/IconButton";
+import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+import ReactTimeAgo from "react-time-ago";
+import Typography from "@mui/material/Typography";
+import Card from "@mui/material/Card";
+
+import Modal from "@mui/material/Modal";
+import { Post } from "../../../lib/models/post/Post";
+import AddCommentForm from "../AddCommentForm/AddCommentForm";
+
+const style = {
+  position: "absolute" as "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: "60%",
+  height: "800px",
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  backgroundColor: "#1E1F23",
+  p: 4,
+  overflow: "scroll",
+  overflowX: "hidden",
+};
+
+type Props = {
+  post: Post;
+};
+
+export default function CommentsModal({ post }: Props) {
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  return (
+    <div>
+      <div onClick={handleOpen}>{post.comment_count || 0} Comments</div>
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+        disableScrollLock={true}
+      >
+        <Box sx={style}>
+          <div>
+            <Card
+              key={post.post_id}
+              sx={{
+                minWidth: 275,
+                margin: "30px 0px",
+                backgroundColor: "#1E1F23",
+                color: "white",
+                border: "2px solid #56575A",
+                textAlign: "left",
+              }}
+            >
+              <CardContent>
+                <Typography sx={{ color: "#787C7E" }}>
+                  Posted by {post.username}{" "}
+                  <ReactTimeAgo
+                    date={new Date(post.created_on)}
+                    locale="en-US"
+                  />
+                </Typography>
+              </CardContent>
+              <CardContent>
+                <Typography variant="h4">{post.title}</Typography>
+                <Typography variant="h6">{post.description}</Typography>
+              </CardContent>
+              <CardContent>
+                <a className="link" target="_blank" href={post.post_link}>
+                  {post.post_link}
+                </a>
+              </CardContent>
+            </Card>
+          </div>
+          <AddCommentForm post={post} />
+        </Box>
+      </Modal>
+    </div>
+  );
+}
+
+{
+  /* {user?.user_id === post.user_id ? (
+            <DeleteModal
+              openButton={
+                <IconButton sx={{ color: "white" }}>
+                  <DeleteOutlineIcon />
+                  <Typography sx={{ marginLeft: 1 }} variant="h5">
+                    Delete Post
+                  </Typography>
+                </IconButton>
+              }
+              onSubmit={() => onSubmit(post)}
+              item={post}
+            />
+          ) : (
+            ""
+          )} */
+}
