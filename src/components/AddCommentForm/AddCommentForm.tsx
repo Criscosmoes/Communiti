@@ -30,6 +30,7 @@ const AddCommentForm = ({ post }: Props) => {
         ...values,
         post_id: post.post_id,
         community_id: post.community_id,
+        // @ts-ignore
         user_id: session?.user.user_id!,
       };
 

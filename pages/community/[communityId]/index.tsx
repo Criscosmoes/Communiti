@@ -10,8 +10,7 @@ import AboutCommunity from "../../../src/components/AboutCommunity/AboutCommunit
 import { getPostsByCommunityId } from "../../../lib/models/post/queries";
 import { Post } from "../../../lib/models/post/Post";
 import PostList from "../../../src/components/PostList/PostList";
-import { useSession, signIn, signOut } from "next-auth/react";
-import { getSession } from "next-auth/react";
+import { getSession, useSession } from "next-auth/react";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -62,6 +61,7 @@ export default function CommunityPage({ community, posts }: Props) {
 
 export async function getServerSideProps(context: any) {
   const session = await getSession(context);
+  // @ts-ignore
 
   const user_id = session?.user?.user_id ? session?.user.user_id : 0;
 

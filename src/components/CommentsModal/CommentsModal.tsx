@@ -1,10 +1,7 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import IconButton from "@mui/material/IconButton";
-import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
+
 import ReactTimeAgo from "react-time-ago";
 import Typography from "@mui/material/Typography";
 import Card from "@mui/material/Card";
@@ -86,23 +83,4 @@ export default function CommentsModal({ post }: Props) {
       </Modal>
     </div>
   );
-}
-
-{
-  /* {user?.user_id === post.user_id ? (
-            <DeleteModal
-              openButton={
-                <IconButton sx={{ color: "white" }}>
-                  <DeleteOutlineIcon />
-                  <Typography sx={{ marginLeft: 1 }} variant="h5">
-                    Delete Post
-                  </Typography>
-                </IconButton>
-              }
-              onSubmit={() => onSubmit(post)}
-              item={post}
-            />
-          ) : (
-            ""
-          )} */
 }

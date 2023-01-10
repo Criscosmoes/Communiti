@@ -7,7 +7,6 @@ import IconButton from "@mui/material/IconButton";
 import ChatBubbleOutlineIcon from "@mui/icons-material/ChatBubbleOutline";
 import DeleteOutlineIcon from "@mui/icons-material/DeleteOutline";
 import ReactTimeAgo from "react-time-ago";
-import Modal from "@mui/material/Modal";
 import { useState, useEffect } from "react";
 import CommentsModal from "../CommentsModal/CommentsModal";
 
@@ -43,6 +42,9 @@ export default function PostList({ posts, user, community }: Props) {
   const renderedPosts = currentPosts.map((post) => {
     const now = new Date(post.created_on);
 
+    // @ts-ignore
+    const userId = user.user_id;
+
     return (
       <Card
         key={post.post_id}
@@ -77,7 +79,7 @@ export default function PostList({ posts, user, community }: Props) {
               <CommentsModal post={post} />
             </Typography>
           </IconButton>
-          {user?.user_id === post.user_id ? (
+          {userId === post.user_id ? (
             <DeleteModal
               openButton={
                 <IconButton sx={{ color: "white" }}>

@@ -1,11 +1,10 @@
 import Head from "next/head";
 
 import Dashboard from "../src/components/Dashboard/Dashboard";
-import { useSession, getSession } from "next-auth/react";
+import { getSession } from "next-auth/react";
 
 import { User } from "../lib/models/user/User";
 import {
-  getCommunities,
   getRecentlyAddedCommunities,
   getPopularCommunities,
   getCommunitiesByUserId,
@@ -22,7 +21,6 @@ type Props = {
 };
 
 export default function Home({
-  user,
   communities,
   recentlyAddedCommunities,
   popularCommunities,
@@ -49,6 +47,7 @@ export default function Home({
 export async function getServerSideProps(context: any) {
   const session = await getSession(context);
 
+  // @ts-ignore
   const user_id = session?.user?.user_id ? session?.user.user_id : 0;
 
   const communities = await getCommunitiesByUserId(user_id);

@@ -35,6 +35,8 @@ export default NextAuth({
 
       const currentUser: User = await getUserByOauthId(token?.sub!);
 
+      // @ts-ignore
+
       session.user.user_id = currentUser.user_id;
 
       return session;

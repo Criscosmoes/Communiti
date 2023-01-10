@@ -37,6 +37,8 @@ export default function AboutCommunity({ community }: Props) {
 
     try {
       await followCommunity({
+        // @ts-ignore
+
         user_id: session?.user?.user_id,
         community_id: community.community_id,
       });
@@ -55,6 +57,8 @@ export default function AboutCommunity({ community }: Props) {
     setLoading(true);
     try {
       await unfollowCommunity({
+        // @ts-ignore
+
         user_id: session?.user?.user_id,
         community_id: community.community_id,
       });

@@ -2,11 +2,9 @@ import * as React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import Button from "@mui/material/Button";
 import CardActions from "@mui/material/CardActions";
 import { Community } from "../../../lib/models/community/Community";
 import Link from "next/link";
-import FormModal from "../../global/components/Modal/FormModal";
 import AddCommunityForm from "../AddCommunityForm/AddCommunityForm";
 
 type Props = {

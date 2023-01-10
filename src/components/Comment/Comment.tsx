@@ -31,6 +31,9 @@ const Comment = ({ comment, setComments }: Props) => {
     });
   };
 
+  // @ts-ignore
+  const userId = session?.user?.user_id;
+
   return (
     <Card
       key={comment.comment_id}
@@ -58,7 +61,7 @@ const Comment = ({ comment, setComments }: Props) => {
         </a>
       </CardContent>
       <CardActions>
-        {session?.user?.user_id! === comment.user_id ? (
+        {userId === comment.user_id ? (
           <DeleteModal
             openButton={
               <IconButton sx={{ color: "white" }}>
