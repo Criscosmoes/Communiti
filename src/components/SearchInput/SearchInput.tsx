@@ -70,6 +70,7 @@ export default function SearchInput() {
         clearOnEscape={true}
         clearOnBlur={true}
         popupIcon={""}
+        // @ts-ignore
         onChange={(e, value) => onSelect(e, value)}
       />
     </Stack>
