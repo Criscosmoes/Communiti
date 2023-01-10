@@ -15,7 +15,6 @@
     "jsx": "preserve",
     "incremental": true, 
     "strictNullChecks": false,
-    "@typescript-eslint/prefer-nullish-coalescing": "warn",
 
     
   },
