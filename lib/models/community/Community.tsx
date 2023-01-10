@@ -6,4 +6,5 @@ export interface Community {
   image: string;
   followers?: number;
   created_on?: string;
+  following: boolean;
 }

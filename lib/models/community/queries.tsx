@@ -16,6 +16,14 @@ const addCommunity = async (community: any) => {
   return newCommunity.data;
 };
 
+const getCommunitiesByUserId = async (id: number | null) => {
+  const communities = await axios.get(
+    `http://localhost:5432/api/communities/userId/${id}`
+  );
+
+  return communities.data;
+};
+
 const getRecentlyAddedCommunities = async () => {
   const communities = await axios.get(
     "http://localhost:5432/api/recent_communities"
@@ -40,9 +48,10 @@ const getPopularCommunities = async () => {
   return communities.data;
 };
 
-const getCommunityById = async (id: string) => {
-  const community = await axios.get(
-    `http://localhost:5432/api/communities/id/${id}`
+const getCommunityById = async (userCommunity: any) => {
+  const community = await axios.post(
+    `http://localhost:5432/api/communities/community/id`,
+    userCommunity
   );
 
   return community.data;
@@ -55,4 +64,5 @@ export {
   getCommunitiesByTerm,
   getCommunityById,
   addCommunity,
+  getCommunitiesByUserId,
 };

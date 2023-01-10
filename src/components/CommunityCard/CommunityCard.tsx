@@ -7,15 +7,66 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import AddIcon from "@mui/icons-material/Add";
 import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import RemoveCircleOutlineIcon from "@mui/icons-material/RemoveCircleOutline";
+import { useSession, signIn } from "next-auth/react";
+import { toast } from "react-toastify";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 import { Community } from "../../../lib/models/community/Community";
 import Link from "next/link";
+import { useState } from "react";
+import {
+  followCommunity,
+  unfollowCommunity,
+} from "../../../lib/models/following/queries";
 
 type Props = {
   community: Community;
 };
 
 export default function CommunityCard({ community }: Props) {
+  const { data: session } = useSession();
+
+  const [follow, setFollow] = useState(community.following);
+  const [loading, setLoading] = useState(false);
+
+  const onFollowClick = async () => {
+    setLoading(true);
+
+    try {
+      await followCommunity({
+        user_id: session?.user?.user_id,
+        community_id: community.community_id,
+      });
+
+      toast.success("Successfully followed", { position: "bottom-left" });
+
+      setFollow(!follow);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
+  };
+
+  const onUnfollowClick = async () => {
+    setLoading(true);
+    try {
+      await unfollowCommunity({
+        user_id: session?.user?.user_id,
+        community_id: community.community_id,
+      });
+
+      toast.success("Successfully unfollowed", { position: "bottom-left" });
+
+      setFollow(!follow);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
+  };
+
   return (
     <Card
       sx={{
@@ -50,13 +101,50 @@ export default function CommunityCard({ community }: Props) {
             <ArrowForwardIcon sx={{ marginLeft: 1 }} />
           </Button>
         </Link>
-        <Button
-          size="medium"
-          sx={{ color: "white", backgroundColor: "#2C87FC", marginLeft: 1 }}
-        >
-          <Typography sx={{ color: "white" }}>Follow</Typography>
-          <AddIcon sx={{ marginLeft: 1 }} />
-        </Button>
+        {session?.user ? (
+          <div>
+            {follow ? (
+              <LoadingButton
+                size="medium"
+                sx={{
+                  color: "white",
+                  backgroundColor: "#2C87FC",
+                  marginLeft: 1,
+                }}
+                onClick={() => onUnfollowClick()}
+                loading={loading}
+              >
+                Unfollow <AddIcon sx={{ marginLeft: 1 }} />
+              </LoadingButton>
+            ) : (
+              <LoadingButton
+                size="medium"
+                sx={{
+                  color: "white",
+                  backgroundColor: "#2C87FC",
+                  marginLeft: 1,
+                }}
+                onClick={() => onFollowClick()}
+                loading={loading}
+              >
+                Follow <AddIcon sx={{ marginLeft: 1 }} />
+              </LoadingButton>
+            )}
+          </div>
+        ) : (
+          <Button
+            size="medium"
+            sx={{
+              color: "white",
+              backgroundColor: "#2C87FC",
+              marginLeft: 1,
+            }}
+            onClick={() => signIn()}
+          >
+            <Typography sx={{ color: "white" }}>Follow</Typography>
+            <AddIcon sx={{ marginLeft: 1 }} />
+          </Button>
+        )}
       </CardActions>
     </Card>
   );

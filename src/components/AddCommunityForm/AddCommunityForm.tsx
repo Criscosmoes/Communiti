@@ -16,6 +16,7 @@ import { Post } from "../../../lib/models/post/Post";
 import { toast } from "react-toastify";
 import { addCommunity } from "../../../lib/models/community/queries";
 import { useRouter } from "next/router";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 const style = {
   position: "absolute" as "absolute",
@@ -37,12 +38,13 @@ const AddCommunityForm = () => {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  const [loading, setLoading] = useState(false);
 
   const { data: session } = useSession();
   const router = useRouter();
 
   const onFormSubmit = async (values: any, actions: any) => {
-    console.log(values);
+    setLoading(true);
 
     try {
       const form = new FormData();
@@ -56,7 +58,10 @@ const AddCommunityForm = () => {
       const newCommunity: Community = await addCommunity(form);
 
       router.push(`/community/${newCommunity.community_id}`);
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
+
       console.log(error);
     }
   };
@@ -115,7 +120,7 @@ const AddCommunityForm = () => {
       >
         <Box sx={style}>
           <Typography sx={{ marginBottom: 3, color: "white" }} variant="h4">
-            Create A Post
+            Create A Community
           </Typography>
           <form className="form-container" onSubmit={handleSubmit}>
             <label className="form-label">Community Name</label>
@@ -198,13 +203,19 @@ const AddCommunityForm = () => {
               ""
             )}
 
-            <button
-              className="form-button"
-              disabled={isSubmitting}
+            <LoadingButton
+              size="medium"
               type="submit"
+              sx={{
+                color: "white",
+                backgroundColor: "#2C87FC",
+                marginLeft: 1,
+              }}
+              className="submit"
+              loading={loading}
             >
               Submit
-            </button>
+            </LoadingButton>
           </form>
         </Box>
       </Modal>
