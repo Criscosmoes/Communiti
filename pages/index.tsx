@@ -1,12 +1,14 @@
 import Head from "next/head";
 
 import Dashboard from "../src/components/Dashboard/Dashboard";
+import { useSession, getSession } from "next-auth/react";
 
 import { User } from "../lib/models/user/User";
 import {
   getCommunities,
   getRecentlyAddedCommunities,
   getPopularCommunities,
+  getCommunitiesByUserId,
 } from "../lib/models/community/queries";
 import { getRecentyAddedUsers } from "../lib/models/user/queries";
 import { Community } from "../lib/models/community/Community";
@@ -45,7 +47,11 @@ export default function Home({
 }
 
 export async function getServerSideProps(context: any) {
-  const communities = await getCommunities();
+  const session = await getSession(context);
+
+  const user_id = session?.user?.user_id ? session?.user.user_id : 0;
+
+  const communities = await getCommunitiesByUserId(user_id);
 
   const recentlyAddedCommunities = await getRecentlyAddedCommunities();
 

@@ -42,8 +42,6 @@ const AddCommentForm = ({ post }: Props) => {
       resetForm();
 
       toast.success("Added new comment", { position: "bottom-left" });
-
-      console.log(newComment);
     } catch (error) {
       toast.error("Check console for error.");
       console.log(error);

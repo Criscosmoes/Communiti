@@ -9,12 +9,66 @@ import GroupIcon from "@mui/icons-material/Group";
 import DescriptionIcon from "@mui/icons-material/Description";
 import CommentIcon from "@mui/icons-material/Comment";
 import ReactTimeAgo from "react-time-ago";
+import Button from "@mui/material/Button";
+import AddIcon from "@mui/icons-material/Add";
+import { useSession, signIn } from "next-auth/react";
+import { useState } from "react";
+import {
+  followCommunity,
+  unfollowCommunity,
+} from "../../../lib/models/following/queries";
+import { toast } from "react-toastify";
+import LoadingButton from "@mui/lab/LoadingButton";
 
 type Props = {
   community: Community;
 };
 
 export default function AboutCommunity({ community }: Props) {
+  const { data: session } = useSession();
+
+  console.log(community, "community");
+
+  const [follow, setFollow] = useState(community.following);
+  const [loading, setLoading] = useState(false);
+
+  const onFollowClick = async () => {
+    setLoading(true);
+
+    try {
+      await followCommunity({
+        user_id: session?.user?.user_id,
+        community_id: community.community_id,
+      });
+
+      toast.success("Successfully followed", { position: "bottom-left" });
+
+      setFollow(!follow);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
+  };
+
+  const onUnfollowClick = async () => {
+    setLoading(true);
+    try {
+      await unfollowCommunity({
+        user_id: session?.user?.user_id,
+        community_id: community.community_id,
+      });
+
+      toast.success("Successfully unfollowed", { position: "bottom-left" });
+
+      setFollow(!follow);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      console.log(error);
+    }
+  };
+
   return (
     <Card
       sx={{
@@ -75,13 +129,57 @@ export default function AboutCommunity({ community }: Props) {
       >
         <GroupIcon />
         <Typography sx={{ marginLeft: 1 }} variant="h6">
-          {community.followers} followers
+          {community.followers} follower(s)
         </Typography>
       </CardContent>
 
-      <CardActions
-        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-      ></CardActions>
+      <CardActions>
+        {session?.user ? (
+          <div>
+            {follow ? (
+              <LoadingButton
+                sx={{
+                  color: "white",
+                  backgroundColor: "#2C87FC",
+                  marginLeft: 1,
+                  width: "200px",
+                }}
+                onClick={() => onUnfollowClick()}
+                loading={loading}
+              >
+                Unfollow <AddIcon sx={{ marginLeft: 1 }} />
+              </LoadingButton>
+            ) : (
+              <LoadingButton
+                size="medium"
+                sx={{
+                  color: "white",
+                  backgroundColor: "#2C87FC",
+                  marginLeft: 1,
+                  width: "200px",
+                }}
+                onClick={() => onFollowClick()}
+                loading={loading}
+              >
+                Follow <AddIcon sx={{ marginLeft: 1 }} />
+              </LoadingButton>
+            )}
+          </div>
+        ) : (
+          <Button
+            size="medium"
+            sx={{
+              color: "white",
+              backgroundColor: "#2C87FC",
+              marginLeft: 1,
+            }}
+            onClick={() => signIn()}
+          >
+            <Typography sx={{ color: "white" }}>Follow</Typography>
+            <AddIcon sx={{ marginLeft: 1 }} />
+          </Button>
+        )}
+      </CardActions>
     </Card>
   );
 }

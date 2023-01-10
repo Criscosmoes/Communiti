@@ -11,7 +11,7 @@ import { getPostsByCommunityId } from "../../../lib/models/post/queries";
 import { Post } from "../../../lib/models/post/Post";
 import PostList from "../../../src/components/PostList/PostList";
 import { useSession, signIn, signOut } from "next-auth/react";
-import { User } from "next-auth";
+import { getSession } from "next-auth/react";
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === "dark" ? "#1A2027" : "#fff",
@@ -61,7 +61,14 @@ export default function CommunityPage({ community, posts }: Props) {
 }
 
 export async function getServerSideProps(context: any) {
-  const community = await getCommunityById(context.params.communityId);
+  const session = await getSession(context);
+
+  const user_id = session?.user?.user_id ? session?.user.user_id : 0;
+
+  const community = await getCommunityById({
+    user_id,
+    community_id: context.params.communityId,
+  });
 
   const posts = await getPostsByCommunityId(context.params.communityId);
 
