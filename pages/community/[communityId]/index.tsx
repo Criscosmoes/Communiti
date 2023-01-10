@@ -28,6 +28,9 @@ type Props = {
 export default function CommunityPage({ community, posts }: Props) {
   const { data: session } = useSession();
 
+  // @ts-ignore
+  const currentUser = session?.user;
+
   return (
     <Box>
       <Grid container>
@@ -44,6 +47,7 @@ export default function CommunityPage({ community, posts }: Props) {
             <CommunityTitleCard community={community} />
             <PostList
               posts={posts}
+              // @ts-ignore
               user={session?.user!}
               community={community}
             />

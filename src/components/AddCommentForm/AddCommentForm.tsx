@@ -15,7 +15,6 @@ import Comment from "../Comment/Comment";
 import Typography from "@mui/material/Typography";
 
 type Props = {
-  comments: Comment[];
   post: Post;
 };
 
