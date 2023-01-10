@@ -3,7 +3,7 @@ import { Following } from "./Following";
 
 const followCommunity = async (following: Following) => {
   const success = await axios.post(
-    `http://localhost:5432/api/follow`,
+    `${process.env.NEXT_PUBLIC_HOST_URL}/follow`,
     following
   );
 
@@ -12,7 +12,7 @@ const followCommunity = async (following: Following) => {
 
 const unfollowCommunity = async (following: Following) => {
   const success = await axios.post(
-    `http://localhost:5432/api/unfollow`,
+    `${process.env.NEXT_PUBLIC_HOST_URL}/unfollow`,
     following
   );
 

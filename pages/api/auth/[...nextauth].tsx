@@ -15,14 +15,14 @@ export default NextAuth({
   callbacks: {
     async signIn({ user }) {
       const check = await axios.get(
-        `http://localhost:5432/api/users/${user.id}`
+        `${process.env.NODE_HOST_URL}/users/${user.id}`
       );
 
       if (check.data.length > 0) {
         return true;
       }
 
-      await axios.post("http://localhost:5432/api/users", {
+      await axios.post(`${process.env.NODE_HOST_URL}/users`, {
         username: user.name,
         oauth_id: user.id,
         image: user.image,
