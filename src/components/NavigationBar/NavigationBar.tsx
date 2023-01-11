@@ -118,8 +118,10 @@ export default function NavigationBar() {
             onClick={() => signIn()}
           >
             <GoogleIcon />
+            <Typography sx={{ marginLeft: 1 }} variant="h6">
+              Log In With Google
+            </Typography>
           </IconButton>
-          <Typography variant="h6">Log In With Google</Typography>
         </MenuItem>
       )}
     </Menu>
