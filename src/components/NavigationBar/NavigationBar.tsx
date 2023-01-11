@@ -118,9 +118,9 @@ export default function NavigationBar() {
           >
             <GoogleIcon />
           </IconButton>
-          <Link href="http://localhost:5432/auth/google">
-            Log In With Google
-          </Link>
+          <button onClick={() => signIn()} className="google-button">
+            <GoogleIcon /> <h2>Log in with Google</h2>
+          </button>
         </MenuItem>
       )}
     </Menu>
