@@ -115,12 +115,11 @@ export default function NavigationBar() {
             aria-controls="primary-search-account-menu"
             aria-haspopup="true"
             color="inherit"
+            onClick={() => signIn()}
           >
             <GoogleIcon />
           </IconButton>
-          <button onClick={() => signIn()} className="google-button">
-            <GoogleIcon /> <h2>Log in with Google</h2>
-          </button>
+          <Typography variant="h6">Log In With Google</Typography>
         </MenuItem>
       )}
     </Menu>
