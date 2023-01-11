@@ -2,7 +2,7 @@ import * as React from "react";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Autocomplete from "@mui/material/Autocomplete";
-import { useState, useRef } from "react";
+import { useState } from "react";
 import debounce from "lodash.debounce";
 import { useRouter } from "next/router";
 

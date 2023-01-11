@@ -6,14 +6,9 @@ import Modal from "@mui/material/Modal";
 import { useState } from "react";
 import FormData from "form-data";
 
-import { CommunitySchema, PostSchema } from "../../FormSchemas";
+import { CommunitySchema } from "../../FormSchemas";
 import { Community } from "../../../lib/models/community/Community";
-import { User } from "next-auth";
-import AccountCircle from "@mui/icons-material/AccountCircle";
 import { signIn, useSession } from "next-auth/react";
-import { addPost } from "../../../lib/models/post/queries";
-import { Post } from "../../../lib/models/post/Post";
-import { toast } from "react-toastify";
 import { addCommunity } from "../../../lib/models/community/queries";
 import { useRouter } from "next/router";
 import LoadingButton from "@mui/lab/LoadingButton";
@@ -43,7 +38,7 @@ const AddCommunityForm = () => {
   const { data: session } = useSession();
   const router = useRouter();
 
-  const onFormSubmit = async (values: any, actions: any) => {
+  const onFormSubmit = async (values: any) => {
     setLoading(true);
 
     try {
@@ -75,7 +70,6 @@ const AddCommunityForm = () => {
     values,
     errors,
     touched,
-    isSubmitting,
     handleBlur,
     handleChange,
     setFieldValue,

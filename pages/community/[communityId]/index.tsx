@@ -28,9 +28,6 @@ type Props = {
 export default function CommunityPage({ community, posts }: Props) {
   const { data: session } = useSession();
 
-  // @ts-ignore
-  const currentUser = session?.user;
-
   return (
     <Box>
       <Grid container>

@@ -3,7 +3,6 @@ import { useState, useEffect } from "react";
 
 import { CommentSchema } from "../../FormSchemas";
 import { useSession, signIn } from "next-auth/react";
-import { addPost } from "../../../lib/models/post/queries";
 import { Post } from "../../../lib/models/post/Post";
 import { toast } from "react-toastify";
 import { IComment } from "../../../lib/models/comment/Comment";
@@ -66,15 +65,15 @@ const AddCommentForm = ({ post }: Props) => {
     validationSchema: CommentSchema,
   });
 
-  const fetchComments = async (postId: number) => {
-    const comments = await getCommentsByPostId(postId);
-
-    setComments(comments.reverse());
-  };
-
   useEffect(() => {
+    const fetchComments = async (postId: number) => {
+      const comments = await getCommentsByPostId(postId);
+
+      setComments(comments.reverse());
+    };
+
     fetchComments(post.post_id);
-  }, []);
+  }, [post.post_id]);
 
   const renderedComments = comments.map((comment) => {
     return (

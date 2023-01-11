@@ -71,7 +71,12 @@ export default function CommentsModal({ post }: Props) {
                 <Typography variant="h6">{post.description}</Typography>
               </CardContent>
               <CardContent>
-                <a className="link" target="_blank" href={post.post_link}>
+                <a
+                  className="link"
+                  target="_blank"
+                  rel="noreferrer"
+                  href={post.post_link}
+                >
                   {post.post_link}
                 </a>
               </CardContent>

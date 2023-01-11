@@ -1,5 +1,4 @@
 import axios from "axios";
-import { Community } from "./Community";
 
 const getCommunities = async () => {
   const communities = await axios.get(

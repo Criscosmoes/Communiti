@@ -5,7 +5,6 @@ import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
-import InputBase from "@mui/material/InputBase";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -13,7 +12,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import GoogleIcon from "@mui/icons-material/Google";
-import { User } from "../../../lib/models/user/User";
 import SearchInput from "../SearchInput/SearchInput";
 import { useSession, signIn, signOut } from "next-auth/react";
 
@@ -46,7 +44,9 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 }));
 
 export default function NavigationBar() {
-  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const [, /* anchorEl */ setAnchorEl] = React.useState<null | HTMLElement>(
+    null
+  );
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     React.useState<null | HTMLElement>(null);
 
@@ -94,6 +94,7 @@ export default function NavigationBar() {
           >
             {session?.user.image ? (
               <img
+                alt="user image"
                 className="user-image"
                 src={session?.user.image}
                 referrerPolicy="no-referrer"
@@ -173,6 +174,7 @@ export default function NavigationBar() {
                 >
                   {session?.user.image ? (
                     <img
+                      alt="user image"
                       className="user-image"
                       src={session?.user.image}
                       referrerPolicy="no-referrer"

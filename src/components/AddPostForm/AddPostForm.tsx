@@ -1,6 +1,5 @@
 import { useFormik } from "formik";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import { useState } from "react";
@@ -102,6 +101,7 @@ const AddPostForm = ({ user, community, setCurrentPosts }: Props) => {
           }}
         >
           <img
+            alt="user image"
             className="user-image"
             src={user?.image!}
             referrerPolicy="no-referrer"

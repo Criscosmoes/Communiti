@@ -5,10 +5,6 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 
 import LoadingButton from "@mui/lab/LoadingButton";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
-import SaveIcon from "@mui/icons-material/Save";
-import SendIcon from "@mui/icons-material/Send";
 import { toast } from "react-toastify";
 
 const style = {
@@ -29,7 +25,7 @@ const style = {
 };
 
 export default function DeleteModal(props: any) {
-  const { openButton, onSubmit, data: Component, item } = props;
+  const { openButton, onSubmit, item } = props;
 
   const [open, setOpen] = React.useState(false);
   const [loading, setLoading] = React.useState(false);

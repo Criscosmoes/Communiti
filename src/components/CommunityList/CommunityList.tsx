@@ -1,6 +1,5 @@
 import { Community } from "../../../lib/models/community/Community";
 import CommunityCard from "../CommunityCard/CommunityCard";
-import styles from "./CommunityList.module.css";
 
 type Props = {
   communities: Community[];

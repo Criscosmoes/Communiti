@@ -22,6 +22,7 @@ export default function RecentlyAddedUsers({ recentUsers }: Props) {
       >
         <Typography variant="h5">{user.username}</Typography>
         <img
+          alt="user image"
           className="user-image"
           src={user.image}
           referrerPolicy="no-referrer"

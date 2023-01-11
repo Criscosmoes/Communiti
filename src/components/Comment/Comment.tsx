@@ -56,7 +56,12 @@ const Comment = ({ comment, setComments }: Props) => {
         <Typography variant="h6">{comment.comment}</Typography>
       </CardContent>
       <CardContent>
-        <a className="link" target="_blank" href={comment.comment_link}>
+        <a
+          className="link"
+          target="_blank"
+          rel="noreferrer"
+          href={comment.comment_link}
+        >
           {comment.comment_link}
         </a>
       </CardContent>
