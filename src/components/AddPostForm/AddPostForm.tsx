@@ -46,7 +46,7 @@ const AddPostForm = ({ user, community, setCurrentPosts }: Props) => {
         ...values,
         // @ts-ignore
 
-        user_id: user.user_id,
+        user_id: user?.user_id,
         community_id: community.community_id,
       };
 

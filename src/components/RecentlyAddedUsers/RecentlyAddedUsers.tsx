@@ -13,7 +13,7 @@ export default function RecentlyAddedUsers({ recentUsers }: Props) {
   const renderedCommunities = recentUsers.map((user) => {
     return (
       <CardContent
-        key={user.user_id}
+        key={user?.user_id}
         sx={{
           display: "flex",
           justifyContent: "space-between",

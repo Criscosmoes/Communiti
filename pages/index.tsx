@@ -48,7 +48,7 @@ export async function getServerSideProps(context: any) {
   const session = await getSession(context);
 
   // @ts-ignore
-  const user_id = session?.user?.user_id ? session?.user.user_id : 0;
+  const user_id = session?.user?.user_id ? session?.user?.user_id : 0;
 
   const communities = await getCommunitiesByUserId(user_id);
 

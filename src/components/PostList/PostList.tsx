@@ -43,7 +43,7 @@ export default function PostList({ posts, user, community }: Props) {
     const now = new Date(post.created_on);
 
     // @ts-ignore
-    const userId = user.user_id;
+    const userId = user?.user_id;
 
     return (
       <Card

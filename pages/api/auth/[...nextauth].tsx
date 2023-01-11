@@ -37,7 +37,7 @@ export default NextAuth({
 
       // @ts-ignore
 
-      session.user.user_id = currentUser.user_id;
+      session.user.user_id = currentUser?.user_id;
 
       return session;
     },

@@ -27,8 +27,6 @@ type Props = {
 export default function AboutCommunity({ community }: Props) {
   const { data: session } = useSession();
 
-  console.log(community, "community");
-
   const [follow, setFollow] = useState(community.following);
   const [loading, setLoading] = useState(false);
 
