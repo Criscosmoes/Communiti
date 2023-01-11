@@ -98,11 +98,9 @@ export default function CommunityCard({ community }: Props) {
             size="medium"
             sx={{ color: "white", backgroundColor: "#2C87FC" }}
           >
-            <div className="mobile">
-              <Typography sx={{ color: "white" }}>Go to Community</Typography>
+            <Typography sx={{ color: "white" }}>Go to Community</Typography>
 
-              <ArrowForwardIcon sx={{ marginLeft: 1 }} />
-            </div>
+            <ArrowForwardIcon sx={{ marginLeft: 1 }} />
           </Button>
         </Link>
         {session?.user ? (

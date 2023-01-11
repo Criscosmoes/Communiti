@@ -72,7 +72,6 @@ export default function SearchInput() {
         popupIcon={""}
         // @ts-ignore
         onChange={(e, value) => onSelect(e, value)}
-        sx={{ paddingLeft: "40px" }}
       />
     </Stack>
   );
