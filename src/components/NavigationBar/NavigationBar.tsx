@@ -14,6 +14,7 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import GoogleIcon from "@mui/icons-material/Google";
 import SearchInput from "../SearchInput/SearchInput";
 import { useSession, signIn, signOut } from "next-auth/react";
+import HomeIcon from "@mui/icons-material/Home";
 
 import Link from "next/link";
 
@@ -133,11 +134,12 @@ export default function NavigationBar() {
           <IconButton
             size="large"
             edge="start"
-            color="inherit"
-            aria-label="open drawer"
+            aria-label="home"
             sx={{ display: { lg: "none", md: "block" } }}
           >
-            <MenuIcon />
+            <Link href="/">
+              <HomeIcon sx={{ color: "white" }} />
+            </Link>
           </IconButton>
           <Link className="link" href={"/"}>
             <Typography

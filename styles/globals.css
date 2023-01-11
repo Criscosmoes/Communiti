@@ -98,14 +98,15 @@ a {
 	border-style: none !important;
 }
 
-.css-1qqsdnr-MuiAutocomplete-root .MuiAutocomplete-input {
+/* .css-1qqsdnr-MuiAutocomplete-root .MuiAutocomplete-input {
 	padding-left: 50px !important; 
 
 }
 
 .css-1qqsdnr-MuiAutocomplete-root .MuiOutlinedInput-root {
 	padding: 5px !important
-}
+} */
+
 
 
 .form-container {
@@ -232,6 +233,8 @@ a {
 	height: 150px; 
 }
 
+
+
 @media (max-width: 800px) {
 
 	.css-1lfp3xa {
@@ -248,4 +251,21 @@ a {
 		height: 95% !important;
 		padding: 15px !important; 
 	}
+
+	.css-3vmz1t {
+		margin: 5px !important; 
+	}
+ 	
 }
+
+@media (max-width: 400px) {
+
+	
+	.mobile {
+	   display: flex; 
+	   justify-content: center;
+	   align-items: center;
+	   flex-direction: column;
+   }
+}
+
