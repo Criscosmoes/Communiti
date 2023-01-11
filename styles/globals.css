@@ -16,7 +16,7 @@ menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	margin: 0;
 	padding: 0;
-	border: 0;
+	/* border: 0; */
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
@@ -235,10 +235,17 @@ a {
 @media (max-width: 800px) {
 
 	.css-1lfp3xa {
-		width: 100% !important; 
+		width: 95% !important; 
 	}
 
 	.css-d3syza {
-		width: 90% !important; 
+		width: 93% !important; 
+		height: 95% !important; 
+	}
+
+	.css-lyvwox {
+		width: 93% !important; 
+		height: 95% !important;
+		padding: 15px !important; 
 	}
 }

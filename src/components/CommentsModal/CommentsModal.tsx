@@ -20,7 +20,6 @@ const style = {
   border: "2px solid #000",
   boxShadow: 24,
   backgroundColor: "#1E1F23",
-  p: 4,
   overflow: "scroll",
   overflowX: "hidden",
 };
@@ -45,43 +44,37 @@ export default function CommentsModal({ post }: Props) {
         disableScrollLock={true}
       >
         <Box sx={style}>
-          <div>
-            <Card
-              key={post.post_id}
-              sx={{
-                minWidth: 275,
-                margin: "30px 0px",
-                backgroundColor: "#1E1F23",
-                color: "white",
-                border: "2px solid #56575A",
-                textAlign: "left",
-              }}
-            >
-              <CardContent>
-                <Typography sx={{ color: "#787C7E" }}>
-                  Posted by {post.username}{" "}
-                  <ReactTimeAgo
-                    date={new Date(post.created_on)}
-                    locale="en-US"
-                  />
-                </Typography>
-              </CardContent>
-              <CardContent>
-                <Typography variant="h4">{post.title}</Typography>
-                <Typography variant="h6">{post.description}</Typography>
-              </CardContent>
-              <CardContent>
-                <a
-                  className="link"
-                  target="_blank"
-                  rel="noreferrer"
-                  href={post.post_link}
-                >
-                  {post.post_link}
-                </a>
-              </CardContent>
-            </Card>
-          </div>
+          <Card
+            key={post.post_id}
+            sx={{
+              margin: "30px 0px",
+              backgroundColor: "#1E1F23",
+              color: "white",
+              border: "2px solid #56575A",
+              textAlign: "left",
+            }}
+          >
+            <CardContent>
+              <Typography sx={{ color: "#787C7E" }}>
+                Posted by {post.username}{" "}
+                <ReactTimeAgo date={new Date(post.created_on)} locale="en-US" />
+              </Typography>
+            </CardContent>
+            <CardContent>
+              <Typography variant="h4">{post.title}</Typography>
+              <Typography variant="h6">{post.description}</Typography>
+            </CardContent>
+            <CardContent>
+              <a
+                className="link"
+                target="_blank"
+                rel="noreferrer"
+                href={post.post_link}
+              >
+                {post.post_link}
+              </a>
+            </CardContent>
+          </Card>
           <AddCommentForm post={post} />
         </Box>
       </Modal>
