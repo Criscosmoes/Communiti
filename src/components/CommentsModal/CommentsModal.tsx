@@ -35,7 +35,9 @@ export default function CommentsModal({ post }: Props) {
 
   return (
     <div>
-      <div onClick={handleOpen}>{post.comment_count || 0} Comments</div>
+      <Typography variant="h6" onClick={handleOpen}>
+        {post.comment_count || 0} Comment(s)
+      </Typography>
       <Modal
         open={open}
         onClose={handleClose}
@@ -47,7 +49,7 @@ export default function CommentsModal({ post }: Props) {
           <Card
             key={post.post_id}
             sx={{
-              margin: "30px 0px",
+              margin: "30px 10px",
               backgroundColor: "#1E1F23",
               color: "white",
               border: "2px solid #56575A",

@@ -10,7 +10,14 @@ export const CommunitySchema = yup.object().shape({
   community_name: yup.string().max(50).required("Required"),
   caption: yup.string().max(255).required("Required"),
   description: yup.string().max(250).required("Required"),
-  image: yup.mixed().required("File is required"),
+  image: yup
+    .mixed()
+    .required("File is required")
+    .test(
+      "File is too large",
+      "File is too large",
+      (value) => !value || (value && value.size <= 1024 * 1024)
+    ),
 });
 
 export const CommentSchema = yup.object().shape({

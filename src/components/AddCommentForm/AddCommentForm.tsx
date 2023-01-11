@@ -129,7 +129,7 @@ const AddCommentForm = ({ post }: Props) => {
         </button>
       </form>
       <div>
-        <Typography variant="h4" sx={{ color: "white" }}>
+        <Typography variant="h4" sx={{ color: "white", marginLeft: "10px" }}>
           Comments
         </Typography>
         {renderedComments}

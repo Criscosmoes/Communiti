@@ -26,8 +26,9 @@ export default function CommunityTitleCard({ community }: Props) {
         </Typography>
       </CardContent>
       <CardMedia
-        sx={{ height: 450 }}
-        image={community.image}
+        sx={{ objectFit: "contain" }}
+        component="img"
+        src={community.image}
         title={community.community_name}
       />
     </Card>
