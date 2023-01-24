@@ -23,11 +23,11 @@ caching to lower latency, and maybe some database work like partioning or replic
 
 ## What is Communiti built on?
 
-Communiti is built on React.js/Next.js on the Front-end, Node.js on the API, and PostgreSQL for database. Also good to note that
+Communiti is built on React.js/Next.js/Typescript on the Front-end, Node.js on the API, and PostgreSQL for database. Also good to note that
 Front-end is hosted on Vercel, and API/DB on # AWS. 
 
 
-## Database design and API design
+## Database design
 
 I currently have a couple tables. Communities, Posts, Comments, Users, User_Communities (keep track of following)
 
@@ -47,3 +47,14 @@ I currently have a couple tables. Communities, Posts, Comments, Users, User_Comm
 ![image](https://user-images.githubusercontent.com/54221993/214386255-7e950740-2731-46fe-b574-5e83fb373e13.png)
 
 
+## API design
+
+As you can assume, I created typical CRUD operations on each DB Table.
+
+# Communities, User, User Communities, Posts, Comments
+
+GET, POST, PATCH, DELETE operations on all tables.
+
+## Future of Communiti: 
+
+I plan to keep adding new features consistenly throughout this project. Whether it be to the front-end or back-end. Thanks for reading.
