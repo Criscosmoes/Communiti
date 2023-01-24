@@ -29,7 +29,21 @@ Front-end is hosted on Vercel, and API/DB on # AWS.
 
 ## Database design and API design
 
-I currently have a couple tables. Communities, Posts, Comments, Users, User_Communities(keep track of followers)
+I currently have a couple tables. Communities, Posts, Comments, Users, User_Communities (keep track of following)
 
+# Communities
+![image](https://user-images.githubusercontent.com/54221993/214385398-0a0bb392-7981-45e1-8a3b-e7e9377f32c0.png)
+
+# User
+![image](https://user-images.githubusercontent.com/54221993/214385853-79ef06c0-af75-42c4-a2bd-5a8d5c0d5d92.png)
+
+# User Communities 
+![image](https://user-images.githubusercontent.com/54221993/214385654-0846de81-ffbd-462d-beeb-7d95364e454a.png)
+
+# Posts
+![image](https://user-images.githubusercontent.com/54221993/214386113-67e6f96b-69c3-46b4-ad83-097c664ef2aa.png)
+
+# Comments
+![image](https://user-images.githubusercontent.com/54221993/214386255-7e950740-2731-46fe-b574-5e83fb373e13.png)
 
 
