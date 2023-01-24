@@ -3,7 +3,7 @@
 
 Communiti is a place where people can come together and discuss their favorite topics, interests, and passions. 
 
-## Non-functional requirements
+## Functional requirements
 
 I initially wanted to create an MVP of this application based on these requirements: 
 
