@@ -1,34 +1,35 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## What is Communiti?
 
-First, run the development server:
+Communiti is a place where people can come together and discuss their favorite topics, interests, and passions. 
 
-```bash
-npm run dev
-# or
-yarn dev
-```
+## Non-functional requirements
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+I initially wanted to create an MVP of this application based on these requirements: 
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+1. A user can see communities
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+2. A user can create a community
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+3. A user can comment and engage in conversation with another user
 
-## Learn More
+## System Design of Communiti
 
-To learn more about Next.js, take a look at the following resources:
+This is a very rudimentary design of an application. I plan to scale in the sense of hooking up a CDN to S3 to lower latency, 
+caching to lower latency, and maybe some database work like partioning or replication for fun.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+![image](https://user-images.githubusercontent.com/54221993/214380481-32879da2-4574-451e-9ae7-845736b0c747.png)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## What is Communiti built on?
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Communiti is built on React.js/Next.js on the Front-end, Node.js on the API, and PostgreSQL for database. Also good to note that
+Front-end is hosted on Vercel, and API/DB on # AWS. 
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+## Database design and API design
+
+I currently have a couple tables. Communities, Posts, Comments, Users, User_Communities(keep track of followers)
+
+
+
