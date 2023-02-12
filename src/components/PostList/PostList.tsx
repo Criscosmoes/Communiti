@@ -42,6 +42,8 @@ export default function PostList({ posts, user, community }: Props) {
   const renderedPosts = currentPosts.map((post) => {
     const now = new Date(post.created_on);
 
+    now.setHours(now.getHours() + 8);
+
     // @ts-ignore
     const userId = user?.user_id;
 
@@ -59,8 +61,7 @@ export default function PostList({ posts, user, community }: Props) {
       >
         <CardContent>
           <Typography sx={{ color: "#787C7E" }}>
-            Posted by {post.username || user.name}{" "}
-            <ReactTimeAgo date={now} locale="en-US" />
+            Posted by {post.username} <ReactTimeAgo date={now} locale="en-US" />
           </Typography>
         </CardContent>
         <CardContent>

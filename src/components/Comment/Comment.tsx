@@ -14,10 +14,17 @@ import { Dispatch, SetStateAction } from "react";
 type Props = {
   comment: IComment;
   setComments: Dispatch<SetStateAction<IComment[]>>;
+  setCommentCount: React.Dispatch<React.SetStateAction<number>>;
 };
 
-const Comment = ({ comment, setComments }: Props) => {
+const Comment = ({ comment, setComments, setCommentCount }: Props) => {
   const { data: session } = useSession();
+
+  const now = new Date(comment.created_on);
+
+  now.setHours(now.getHours() + 8);
+
+  console.log(now);
 
   const onDelete = async (comment: IComment) => {
     await deleteComment(comment.comment_id);
@@ -28,6 +35,10 @@ const Comment = ({ comment, setComments }: Props) => {
       );
 
       return newComments;
+    });
+
+    setCommentCount((prevState) => {
+      return prevState - 1;
     });
   };
 
@@ -49,7 +60,7 @@ const Comment = ({ comment, setComments }: Props) => {
       <CardContent>
         <Typography sx={{ color: "#787C7E" }}>
           Posted by {comment.username}{" "}
-          <ReactTimeAgo date={new Date(comment.created_on)} locale="en-US" />
+          <ReactTimeAgo date={new Date(now)} locale="en-US" />
         </Typography>
       </CardContent>
       <CardContent>
@@ -72,7 +83,7 @@ const Comment = ({ comment, setComments }: Props) => {
               <IconButton sx={{ color: "white" }}>
                 <DeleteOutlineIcon />
                 <Typography sx={{ marginLeft: 1 }} variant="h5">
-                  Delete Post
+                  Delete Comment
                 </Typography>
               </IconButton>
             }

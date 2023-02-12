@@ -15,9 +15,10 @@ import Typography from "@mui/material/Typography";
 
 type Props = {
   post: Post;
+  setCommentCount: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const AddCommentForm = ({ post }: Props) => {
+const AddCommentForm = ({ post, setCommentCount }: Props) => {
   const [comments, setComments] = useState<IComment[]>([]);
 
   const { data: session } = useSession();
@@ -36,6 +37,10 @@ const AddCommentForm = ({ post }: Props) => {
 
       setComments((prevState) => {
         return [newComment, ...prevState];
+      });
+
+      setCommentCount((prevState) => {
+        return prevState + 1;
       });
 
       resetForm();
@@ -81,6 +86,7 @@ const AddCommentForm = ({ post }: Props) => {
         key={comment.comment_id}
         comment={comment}
         setComments={setComments}
+        setCommentCount={setCommentCount}
       />
     );
   });
