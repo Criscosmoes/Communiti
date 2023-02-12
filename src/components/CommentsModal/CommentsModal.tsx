@@ -30,13 +30,20 @@ type Props = {
 
 export default function CommentsModal({ post }: Props) {
   const [open, setOpen] = React.useState(false);
+  const [commentCount, setCommentCount] = React.useState(
+    parseInt(post.comment_count)
+  );
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const now = new Date(post.created_on);
+
+  now.setHours(now.getHours() + 8);
 
   return (
     <div>
       <Typography variant="h6" onClick={handleOpen}>
-        {post.comment_count || 0} Comment(s)
+        {commentCount || 0} Comment(s)
       </Typography>
       <Modal
         open={open}
@@ -59,7 +66,7 @@ export default function CommentsModal({ post }: Props) {
             <CardContent>
               <Typography sx={{ color: "#787C7E" }}>
                 Posted by {post.username}{" "}
-                <ReactTimeAgo date={new Date(post.created_on)} locale="en-US" />
+                <ReactTimeAgo date={now} locale="en-US" />
               </Typography>
             </CardContent>
             <CardContent>
@@ -77,7 +84,7 @@ export default function CommentsModal({ post }: Props) {
               </a>
             </CardContent>
           </Card>
-          <AddCommentForm post={post} />
+          <AddCommentForm post={post} setCommentCount={setCommentCount} />
         </Box>
       </Modal>
     </div>

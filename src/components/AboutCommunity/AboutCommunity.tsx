@@ -30,6 +30,10 @@ export default function AboutCommunity({ community }: Props) {
   const [follow, setFollow] = useState(community.following);
   const [loading, setLoading] = useState(false);
 
+  const now = new Date(community.created_on);
+
+  now.setHours(now.getHours() + 8);
+
   const onFollowClick = async () => {
     setLoading(true);
 
@@ -118,8 +122,7 @@ export default function AboutCommunity({ community }: Props) {
       >
         <AccessTimeIcon />
         <Typography sx={{ marginLeft: 1 }} variant="h6">
-          Created{" "}
-          <ReactTimeAgo date={new Date(community.created_on)} locale="en-US" />
+          Created <ReactTimeAgo date={now} locale="en-US" />
         </Typography>
       </CardContent>
 
