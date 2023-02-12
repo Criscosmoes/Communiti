@@ -40,7 +40,7 @@ const AddCommentForm = ({ post, setCommentCount }: Props) => {
       });
 
       setCommentCount((prevState) => {
-        return parseInt(prevState + 1);
+        return prevState + 1;
       });
 
       resetForm();
