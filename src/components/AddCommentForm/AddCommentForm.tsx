@@ -15,7 +15,7 @@ import Typography from "@mui/material/Typography";
 
 type Props = {
   post: Post;
-  setCommentCount: React.Dispatch<React.SetStateAction<string>>;
+  setCommentCount: React.Dispatch<React.SetStateAction<number>>;
 };
 
 const AddCommentForm = ({ post, setCommentCount }: Props) => {
@@ -40,7 +40,7 @@ const AddCommentForm = ({ post, setCommentCount }: Props) => {
       });
 
       setCommentCount((prevState) => {
-        return prevState + 1;
+        return parseInt(prevState + 1);
       });
 
       resetForm();

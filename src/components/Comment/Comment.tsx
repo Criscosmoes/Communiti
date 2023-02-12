@@ -24,8 +24,6 @@ const Comment = ({ comment, setComments, setCommentCount }: Props) => {
 
   now.setHours(now.getHours() + 8);
 
-  console.log(now);
-
   const onDelete = async (comment: IComment) => {
     await deleteComment(comment.comment_id);
 
